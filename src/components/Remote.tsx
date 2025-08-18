@@ -1,5 +1,4 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import './Remote.css';
 
 const CooldownProgress: React.FC<{ seconds: number }> = ({ seconds }) => {
   const radius = 16;
@@ -8,19 +7,25 @@ const CooldownProgress: React.FC<{ seconds: number }> = ({ seconds }) => {
   const offset = circumference - (progress * circumference);
 
   return (
-    <div className="cooldown-container">
-      <svg className="cooldown-svg" width="36" height="36" viewBox="0 0 36 36">
-        <circle className="cooldown-bg" cx="18" cy="18" r={radius} />
+    <div className="relative w-9 h-9">
+      <svg className="transform -rotate-90" width="36" height="36" viewBox="0 0 36 36">
+        <circle className="text-gray-600" strokeWidth="3" stroke="currentColor" fill="transparent" r={radius} cx="18" cy="18" />
         <circle
-          className="cooldown-progress"
-          cx="18"
-          cy="18"
-          r={radius}
+          className="text-blue-500"
+          strokeWidth="3"
           strokeDasharray={circumference}
           strokeDashoffset={offset}
+          strokeLinecap="round"
+          stroke="currentColor"
+          fill="transparent"
+          r={radius}
+          cx="18"
+          cy="18"
         />
       </svg>
-      <div className="cooldown-text">{seconds > 0 ? seconds : ''}</div>
+      <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-white text-xs font-bold">
+        {seconds > 0 ? seconds : ''}
+      </div>
     </div>
   );
 };
@@ -146,39 +151,45 @@ const Remote: React.FC = () => {
 
   const tempPercentage = ((temperature - MIN_TEMP) / (MAX_TEMP - MIN_TEMP)) * 100;
 
+  const gaugeClasses = `relative w-10 h-52 bg-gray-700 rounded-lg overflow-hidden border-2 border-gray-600 flex flex-col-reverse ${
+    isCoolingDown ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
+  }`;
+
+  const buttonClasses = "w-16 h-16 rounded-full bg-gray-700 text-white text-4xl flex items-center justify-center transition-colors duration-200 disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed hover:enabled:bg-gray-600";
+
   return (
-    <div className="remote-container">
-      <div className="remote-card">
-        <div className="status-indicator-area">
+    <div className="flex justify-center items-center w-full min-h-screen">
+      <div className="bg-gray-800 rounded-2xl p-8 shadow-lg relative w-[320px]">
+        <div className="absolute top-4 right-4 w-9 h-9">
           {isCoolingDown ? (
             <CooldownProgress seconds={cooldownSeconds} />
           ) : (
-            showIndicator && <div className="indicator-light on" />
+            showIndicator && <div className="w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_10px_theme(colors.blue.500)]" />
           )}
         </div>
-        <div className="main-ui">
+        <div className="flex gap-8 items-center">
           <div
             ref={gaugeRef}
-            className={`gauge-container ${isCoolingDown ? 'disabled' : ''}`}
+            className={gaugeClasses}
             onMouseDown={handleMouseDown}
             onTouchStart={handleTouchStart}
           >
-            <div className="gauge-fill" style={{ height: `${tempPercentage}%` }} />
+            <div className="bg-blue-500 w-full rounded-md" style={{ height: `${tempPercentage}%` }} />
           </div>
-          <div className="right-panel">
-            <div className="temperature-display">{temperature.toFixed(1)}°</div>
-            <div className="controls">
+          <div className="flex flex-col items-center gap-6">
+            <div className="text-6xl font-thin">{temperature.toFixed(1)}°</div>
+            <div className="flex justify-center gap-4">
               <button
                 onClick={decreaseTemp}
                 disabled={isCoolingDown || temperature <= MIN_TEMP}
-                className="control-button"
+                className={buttonClasses}
               >
                 -
               </button>
               <button
                 onClick={increaseTemp}
                 disabled={isCoolingDown || temperature >= MAX_TEMP}
-                className="control-button"
+                className={buttonClasses}
               >
                 +
               </button>
