@@ -11,7 +11,9 @@ import { ControlButtons } from './ControlButtons';
 export const Remote: React.FC = () => {
   const {
     temperature,
-    handleTemperatureChange,
+    previewTemp,
+    handlePreviewTempChange,
+    commitTemp,
     adjustTemp,
     MIN_TEMP,
     MAX_TEMP,
@@ -22,13 +24,14 @@ export const Remote: React.FC = () => {
   const gaugeRef = useRef<HTMLDivElement>(null);
   const { handleMouseDown, handleTouchStart } = useGauge(
     gaugeRef,
-    handleTemperatureChange,
+    handlePreviewTempChange,
+    commitTemp,
     isCoolingDown,
     MIN_TEMP,
     MAX_TEMP
   );
 
-  const tempPercentage = ((temperature - MIN_TEMP) / (MAX_TEMP - MIN_TEMP)) * 100;
+  const tempPercentage = ((previewTemp - MIN_TEMP) / (MAX_TEMP - MIN_TEMP)) * 100;
 
   return (
     <div className="flex justify-center items-center w-full min-h-screen">
@@ -41,7 +44,7 @@ export const Remote: React.FC = () => {
           )}
         </div>
         <div className="flex flex-col items-center gap-6">
-          <div className="text-6xl font-thin text-gray-800">{temperature.toFixed(1)}°</div>
+          <div className="text-6xl font-thin text-gray-800">{previewTemp.toFixed(1)}°</div>
           <Gauge
             gaugeRef={gaugeRef}
             handleMouseDown={handleMouseDown}
@@ -52,7 +55,7 @@ export const Remote: React.FC = () => {
           <ControlButtons
             adjustTemp={adjustTemp}
             isCoolingDown={isCoolingDown}
-            temperature={temperature}
+            temperature={previewTemp}
             minTemp={MIN_TEMP}
             maxTemp={MAX_TEMP}
           />

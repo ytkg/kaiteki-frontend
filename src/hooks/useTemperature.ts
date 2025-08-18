@@ -6,24 +6,31 @@ const TEMP_STEP = 0.1;
 
 export const useTemperature = (initialTemp = 28.0) => {
   const [temperature, setTemperature] = useState<number>(initialTemp);
+  const [previewTemp, setPreviewTemp] = useState<number>(initialTemp);
 
-  const handleTemperatureChange = useCallback((newTemp: number) => {
+  const handlePreviewTempChange = useCallback((newTemp: number) => {
     const clampedTemp = Math.max(MIN_TEMP, Math.min(MAX_TEMP, newTemp));
     const steppedTemp = Math.round(clampedTemp / TEMP_STEP) * TEMP_STEP;
-    setTemperature(steppedTemp);
+    setPreviewTemp(steppedTemp);
   }, []);
 
+  const commitTemp = useCallback(() => {
+    setTemperature(previewTemp);
+  }, [previewTemp]);
+
   const adjustTemp = useCallback((amount: number) => {
-    setTemperature(prevTemp => {
-      const newTemp = prevTemp + amount;
-      const clampedTemp = Math.max(MIN_TEMP, Math.min(MAX_TEMP, newTemp));
-      return Math.round(clampedTemp / TEMP_STEP) * TEMP_STEP;
-    });
-  }, []);
+    const newTemp = previewTemp + amount;
+    const clampedTemp = Math.max(MIN_TEMP, Math.min(MAX_TEMP, newTemp));
+    const steppedTemp = Math.round(clampedTemp / TEMP_STEP) * TEMP_STEP;
+    setPreviewTemp(steppedTemp);
+    setTemperature(steppedTemp);
+  }, [previewTemp]);
 
   return {
     temperature,
-    handleTemperatureChange,
+    previewTemp,
+    handlePreviewTempChange,
+    commitTemp,
     adjustTemp,
     MIN_TEMP,
     MAX_TEMP

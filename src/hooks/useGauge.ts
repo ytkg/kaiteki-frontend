@@ -2,7 +2,8 @@ import { useRef, useCallback, useEffect } from 'react';
 
 export const useGauge = (
   gaugeRef: React.RefObject<HTMLDivElement | null>,
-  handleTemperatureChange: (newTemp: number) => void,
+  onTempChange: (newTemp: number) => void,
+  onTempChangeCommit: () => void,
   isCoolingDown: boolean,
   minTemp: number,
   maxTemp: number
@@ -14,8 +15,8 @@ export const useGauge = (
     const rect = gaugeRef.current.getBoundingClientRect();
     const percent = 1 - ((y - rect.top) / rect.height);
     const newTemp = percent * (maxTemp - minTemp) + minTemp;
-    handleTemperatureChange(newTemp);
-  }, [gaugeRef, handleTemperatureChange, minTemp, maxTemp]);
+    onTempChange(newTemp);
+  }, [gaugeRef, onTempChange, minTemp, maxTemp]);
 
   const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (isCoolingDown) return;
@@ -42,21 +43,29 @@ export const useGauge = (
     };
 
     const handleMouseUp = () => {
+      if (!isDraggingRef.current) return;
       isDraggingRef.current = false;
+      onTempChangeCommit();
+    };
+
+    const handleTouchEnd = () => {
+      if (!isDraggingRef.current) return;
+      isDraggingRef.current = false;
+      onTempChangeCommit();
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
     window.addEventListener('mouseup', handleMouseUp);
-    window.addEventListener('touchend', handleMouseUp);
+    window.addEventListener('touchend', handleTouchEnd);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('mouseup', handleMouseUp);
-      window.removeEventListener('touchend', handleMouseUp);
+      window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [updateTempFromY]);
+  }, [updateTempFromY, onTempChangeCommit]);
 
   return { handleMouseDown, handleTouchStart };
 };
