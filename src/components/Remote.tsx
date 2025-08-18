@@ -3,7 +3,7 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 const CooldownProgress: React.FC<{ seconds: number }> = ({ seconds }) => {
   const radius = 16;
   const circumference = 2 * Math.PI * radius;
-  const progress = Math.max(0, (5 - seconds) / 5);
+  const progress = Math.max(0, seconds / 5);
   const offset = circumference - (progress * circumference);
 
   return (
@@ -150,11 +150,11 @@ const Remote: React.FC = () => {
 
   const tempPercentage = ((temperature - MIN_TEMP) / (MAX_TEMP - MIN_TEMP)) * 100;
 
-  const gaugeClasses = `relative w-10 h-52 bg-gray-200 rounded-lg overflow-hidden border-2 border-gray-300 flex flex-col-reverse ${
+  const gaugeClasses = `relative w-20 h-52 bg-gray-200 rounded-lg overflow-hidden border-2 border-gray-300 flex flex-col-reverse ${
     isCoolingDown ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
   }`;
 
-  const buttonClasses = "w-14 h-14 rounded-full bg-white text-gray-700 text-xl flex items-center justify-center transition-colors duration-200 shadow-md disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed hover:enabled:bg-gray-50";
+  const buttonClasses = "w-12 h-12 rounded-full bg-white text-gray-700 text-lg flex items-center justify-center transition-colors duration-200 shadow-md disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed hover:enabled:bg-gray-50";
 
   return (
     <div className="flex justify-center items-center w-full min-h-screen">
@@ -176,7 +176,7 @@ const Remote: React.FC = () => {
           >
             <div className="bg-blue-500 w-full rounded-md" style={{ height: `${tempPercentage}%` }} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="flex justify-center items-center gap-2">
               <button onClick={() => adjustTemp(-1.0)} disabled={isCoolingDown || temperature < MIN_TEMP + 1.0} className={buttonClasses}>-1</button>
               <button onClick={() => adjustTemp(-0.1)} disabled={isCoolingDown || temperature <= MIN_TEMP} className={buttonClasses}>-0.1</button>
               <button onClick={() => adjustTemp(0.1)} disabled={isCoolingDown || temperature >= MAX_TEMP} className={buttonClasses}>+0.1</button>
