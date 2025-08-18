@@ -53,7 +53,11 @@ const Remote: React.FC = () => {
   }, []);
 
   const adjustTemp = (amount: number) => {
-    handleTemperatureChange(temperature + amount);
+    setTemperature(prevTemp => {
+      const newTemp = prevTemp + amount;
+      const clampedTemp = Math.max(MIN_TEMP, Math.min(MAX_TEMP, newTemp));
+      return Math.round(clampedTemp / TEMP_STEP) * TEMP_STEP;
+    });
   };
 
   const updateTempFromY = useCallback((y: number) => {
@@ -84,6 +88,7 @@ const Remote: React.FC = () => {
 
     const handleTouchMove = (e: TouchEvent) => {
       if (!isDraggingRef.current) return;
+      e.preventDefault();
       updateTempFromY(e.touches[0].clientY);
     };
 
@@ -92,7 +97,7 @@ const Remote: React.FC = () => {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
     window.addEventListener('mouseup', handleMouseUp);
     window.addEventListener('touchend', handleMouseUp);
 
@@ -111,13 +116,9 @@ const Remote: React.FC = () => {
       return;
     }
 
-    if (isCoolingDown || isDraggingRef.current) return;
-
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
     }
-
-    let countdownInterval: number | null = null;
 
     debounceTimerRef.current = window.setTimeout(() => {
       setShowIndicator(true);
@@ -126,15 +127,14 @@ const Remote: React.FC = () => {
       setIsCoolingDown(true);
       setCooldownSeconds(5);
 
-      countdownInterval = setInterval(() => {
+      const countdownInterval = setInterval(() => {
         setCooldownSeconds(prev => Math.max(0, prev - 1));
       }, 1000);
 
       cooldownTimerRef.current = window.setTimeout(() => {
         setIsCoolingDown(false);
-        if(countdownInterval) clearInterval(countdownInterval);
+        clearInterval(countdownInterval);
       }, 5000);
-
     }, 600);
 
     return () => {
@@ -143,9 +143,6 @@ const Remote: React.FC = () => {
       }
       if (cooldownTimerRef.current) {
         clearTimeout(cooldownTimerRef.current);
-      }
-      if(countdownInterval) {
-        clearInterval(countdownInterval);
       }
     };
   }, [temperature]);
