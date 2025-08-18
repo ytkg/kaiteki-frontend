@@ -180,12 +180,11 @@ const Remote: React.FC = () => {
             <div className="bg-blue-500 w-full rounded-md" style={{ height: `${tempPercentage}%` }} />
           </div>
           <div className="grid grid-cols-2 gap-4">
-              <button onClick={() => adjustTemp(-1.0)} disabled={isCoolingDown || temperature <= MIN_TEMP + 1.0} className={buttonClasses}>-1</button>
+              <button onClick={() => adjustTemp(-1.0)} disabled={isCoolingDown || temperature < MIN_TEMP + 1.0} className={buttonClasses}>-1</button>
               <button onClick={() => adjustTemp(-0.1)} disabled={isCoolingDown || temperature <= MIN_TEMP} className={buttonClasses}>-0.1</button>
               <button onClick={() => adjustTemp(0.1)} disabled={isCoolingDown || temperature >= MAX_TEMP} className={buttonClasses}>+0.1</button>
-              <button onClick={() => adjustTemp(1.0)} disabled={isCoolingDown || temperature >= MAX_TEMP - 1.0} className={buttonClasses}>+1</button>
+              <button onClick={() => adjustTemp(1.0)} disabled={isCoolingDown || temperature > MAX_TEMP - 1.0} className={buttonClasses}>+1</button>
             </div>
-          </div>
         </div>
       </div>
     </div>
