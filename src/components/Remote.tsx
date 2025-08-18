@@ -23,7 +23,7 @@ const CooldownProgress: React.FC<{ seconds: number }> = ({ seconds }) => {
           cy="18"
         />
       </svg>
-      <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-white text-xs font-bold">
+      <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-gray-700 text-xs font-bold">
         {seconds > 0 ? seconds : ''}
       </div>
     </div>
@@ -150,15 +150,15 @@ const Remote: React.FC = () => {
 
   const tempPercentage = ((temperature - MIN_TEMP) / (MAX_TEMP - MIN_TEMP)) * 100;
 
-  const gaugeClasses = `relative w-10 h-52 bg-gray-700 rounded-lg overflow-hidden border-2 border-gray-600 flex flex-col-reverse ${
+  const gaugeClasses = `relative w-10 h-52 bg-gray-200 rounded-lg overflow-hidden border-2 border-gray-300 flex flex-col-reverse ${
     isCoolingDown ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
   }`;
 
-  const buttonClasses = "w-14 h-14 rounded-full bg-gray-700 text-white text-xl flex items-center justify-center transition-colors duration-200 disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed hover:enabled:bg-gray-600";
+  const buttonClasses = "w-14 h-14 rounded-full bg-white text-gray-700 text-xl flex items-center justify-center transition-colors duration-200 shadow-md disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed hover:enabled:bg-gray-50";
 
   return (
     <div className="flex justify-center items-center w-full min-h-screen">
-      <div className="bg-gray-800 rounded-2xl p-8 shadow-lg relative w-[320px]">
+      <div className="bg-white rounded-2xl p-8 shadow-lg relative w-[320px]">
         <div className="absolute top-4 right-4 w-9 h-9">
           {isCoolingDown ? (
             <CooldownProgress seconds={cooldownSeconds} />
@@ -167,7 +167,7 @@ const Remote: React.FC = () => {
           )}
         </div>
         <div className="flex flex-col items-center gap-6">
-          <div className="text-6xl font-thin">{temperature.toFixed(1)}°</div>
+          <div className="text-6xl font-thin text-gray-800">{temperature.toFixed(1)}°</div>
           <div
             ref={gaugeRef}
             className={gaugeClasses}
