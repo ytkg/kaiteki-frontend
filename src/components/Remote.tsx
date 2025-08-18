@@ -32,7 +32,7 @@ const CooldownProgress: React.FC<{ seconds: number }> = ({ seconds }) => {
 
 const MIN_TEMP = 18.0;
 const MAX_TEMP = 30.0;
-const TEMP_STEP = 0.2;
+const TEMP_STEP = 0.1;
 
 const Remote: React.FC = () => {
   const [temperature, setTemperature] = useState<number>(28.0);
@@ -43,6 +43,7 @@ const Remote: React.FC = () => {
   const isDraggingRef = useRef(false);
   const debounceTimerRef = useRef<number | null>(null);
   const cooldownTimerRef = useRef<number | null>(null);
+  const isInitialMount = useRef(true);
 
   const handleTemperatureChange = useCallback((newTemp: number) => {
     // Clamp the temperature to the nearest step within the allowed range
@@ -51,12 +52,8 @@ const Remote: React.FC = () => {
     setTemperature(steppedTemp);
   }, []);
 
-  const increaseTemp = () => {
-    handleTemperatureChange(temperature + TEMP_STEP);
-  };
-
-  const decreaseTemp = () => {
-    handleTemperatureChange(temperature - TEMP_STEP);
+  const adjustTemp = (amount: number) => {
+    handleTemperatureChange(temperature + amount);
   };
 
   const updateTempFromY = useCallback((y: number) => {
@@ -109,6 +106,11 @@ const Remote: React.FC = () => {
 
   // Debounce and Cooldown Logic
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
     if (isCoolingDown || isDraggingRef.current) return;
 
     if (debounceTimerRef.current) {
@@ -155,7 +157,7 @@ const Remote: React.FC = () => {
     isCoolingDown ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
   }`;
 
-  const buttonClasses = "w-16 h-16 rounded-full bg-gray-700 text-white text-4xl flex items-center justify-center transition-colors duration-200 disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed hover:enabled:bg-gray-600";
+  const buttonClasses = "w-14 h-14 rounded-full bg-gray-700 text-white text-xl flex items-center justify-center transition-colors duration-200 disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed hover:enabled:bg-gray-600";
 
   return (
     <div className="flex justify-center items-center w-full min-h-screen">
@@ -167,7 +169,8 @@ const Remote: React.FC = () => {
             showIndicator && <div className="w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_10px_theme(colors.blue.500)]" />
           )}
         </div>
-        <div className="flex gap-8 items-center">
+        <div className="flex flex-col items-center gap-6">
+          <div className="text-6xl font-thin">{temperature.toFixed(1)}°</div>
           <div
             ref={gaugeRef}
             className={gaugeClasses}
@@ -176,23 +179,11 @@ const Remote: React.FC = () => {
           >
             <div className="bg-blue-500 w-full rounded-md" style={{ height: `${tempPercentage}%` }} />
           </div>
-          <div className="flex flex-col items-center gap-6">
-            <div className="text-6xl font-thin">{temperature.toFixed(1)}°</div>
-            <div className="flex justify-center gap-4">
-              <button
-                onClick={decreaseTemp}
-                disabled={isCoolingDown || temperature <= MIN_TEMP}
-                className={buttonClasses}
-              >
-                -
-              </button>
-              <button
-                onClick={increaseTemp}
-                disabled={isCoolingDown || temperature >= MAX_TEMP}
-                className={buttonClasses}
-              >
-                +
-              </button>
+          <div className="grid grid-cols-2 gap-4">
+              <button onClick={() => adjustTemp(-1.0)} disabled={isCoolingDown || temperature <= MIN_TEMP + 1.0} className={buttonClasses}>-1</button>
+              <button onClick={() => adjustTemp(-0.1)} disabled={isCoolingDown || temperature <= MIN_TEMP} className={buttonClasses}>-0.1</button>
+              <button onClick={() => adjustTemp(0.1)} disabled={isCoolingDown || temperature >= MAX_TEMP} className={buttonClasses}>+0.1</button>
+              <button onClick={() => adjustTemp(1.0)} disabled={isCoolingDown || temperature >= MAX_TEMP - 1.0} className={buttonClasses}>+1</button>
             </div>
           </div>
         </div>
