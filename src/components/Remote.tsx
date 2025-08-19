@@ -22,7 +22,7 @@ export const Remote: React.FC = () => {
   const { isCoolingDown, showIndicator, cooldownSeconds } = useCooldown(temperature);
 
   const gaugeRef = useRef<HTMLDivElement>(null);
-  const { handleMouseDown, handleTouchStart } = useGauge(
+  const { handlePointerDown } = useGauge(
     gaugeRef,
     handlePreviewTempChange,
     commitTemp,
@@ -47,8 +47,7 @@ export const Remote: React.FC = () => {
           <div className="text-6xl font-thin text-gray-800">{previewTemp.toFixed(1)}°</div>
           <Gauge
             gaugeRef={gaugeRef}
-            handleMouseDown={handleMouseDown}
-            handleTouchStart={handleTouchStart}
+            handlePointerDown={handlePointerDown}
             isCoolingDown={isCoolingDown}
             tempPercentage={tempPercentage}
           />
