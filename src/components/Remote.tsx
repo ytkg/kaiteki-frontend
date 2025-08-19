@@ -34,6 +34,7 @@ export const Remote: React.FC = () => {
   const tempPercentage = ((previewTemp - MIN_TEMP) / (MAX_TEMP - MIN_TEMP)) * 100;
 
   const dummyButtonClasses = "w-full rounded-md bg-gray-300 text-gray-600 text-sm py-2 disabled:opacity-70 cursor-not-allowed";
+  const powerButtonClasses = "w-12 h-12 rounded-full bg-red-500 text-white flex items-center justify-center shadow-md hover:bg-red-600 disabled:opacity-50";
 
   return (
     <div className="flex justify-center items-center w-full min-h-screen">
@@ -46,8 +47,10 @@ export const Remote: React.FC = () => {
           )}
         </div>
         <div className="flex flex-col items-center gap-4">
-          <div className="bg-gray-800 text-green-400 rounded-md px-4 py-2 font-mono">
+          <button className={powerButtonClasses} disabled>電源</button>
+          <div className="bg-gray-800 text-green-400 rounded-md px-4 py-2 font-mono flex justify-between items-center">
             <div className="text-6xl font-thin">{previewTemp.toFixed(1)}°</div>
+            <div className="text-lg">冷房</div>
           </div>
           <Gauge
             gaugeRef={gaugeRef}
@@ -56,10 +59,11 @@ export const Remote: React.FC = () => {
             tempPercentage={tempPercentage}
           />
           <div className="flex flex-col items-center gap-4 w-full">
-            <div className="grid grid-cols-3 gap-2 w-full">
+            <div className="grid grid-cols-2 gap-2 w-full">
               <button className={dummyButtonClasses} disabled>モード</button>
               <button className={dummyButtonClasses} disabled>風量</button>
               <button className={dummyButtonClasses} disabled>タイマー</button>
+              <button className={dummyButtonClasses} disabled>風向き</button>
             </div>
             <ControlButtons
               adjustTemp={adjustTemp}
