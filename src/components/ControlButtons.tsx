@@ -15,7 +15,7 @@ export const ControlButtons: React.FC<ControlButtonsProps> = ({
   minTemp,
   maxTemp,
 }) => {
-  const buttonClasses = "w-12 h-12 rounded-full bg-white text-gray-700 text-lg flex items-center justify-center transition-colors duration-200 shadow-md disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed hover:enabled:bg-gray-50";
+  const buttonClasses = "w-12 h-12 rounded-lg bg-gray-300 text-gray-800 text-lg flex items-center justify-center transition-transform duration-100 transform border-b-4 border-gray-500 disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed hover:enabled:bg-gray-400 active:bg-gray-500 active:translate-y-1 active:border-b-0";
 
   return (
     <div className="flex justify-center items-center gap-2">
