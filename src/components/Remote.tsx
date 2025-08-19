@@ -35,7 +35,7 @@ export const Remote: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center w-full min-h-screen">
-      <div className="bg-white rounded-2xl p-8 shadow-lg relative w-[320px]">
+      <div className="bg-gray-200 rounded-lg p-8 shadow-md border border-gray-300 relative w-[320px]">
         <div className="absolute top-4 right-4 w-9 h-9">
           {isCoolingDown ? (
             <CooldownProgress seconds={cooldownSeconds} />
@@ -44,7 +44,9 @@ export const Remote: React.FC = () => {
           )}
         </div>
         <div className="flex flex-col items-center gap-6">
-          <div className="text-6xl font-thin text-gray-800">{previewTemp.toFixed(1)}°</div>
+          <div className="bg-gray-800 text-green-400 rounded-md px-4 py-2 font-mono">
+            <div className="text-6xl font-thin">{previewTemp.toFixed(1)}°</div>
+          </div>
           <Gauge
             gaugeRef={gaugeRef}
             handlePointerDown={handlePointerDown}
