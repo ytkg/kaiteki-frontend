@@ -2,16 +2,14 @@ import React from 'react';
 
 interface GaugeProps {
   gaugeRef: React.RefObject<HTMLDivElement | null>;
-  handleMouseDown: (e: React.MouseEvent<HTMLDivElement>) => void;
-  handleTouchStart: (e: React.TouchEvent<HTMLDivElement>) => void;
+  handlePointerDown: (e: React.PointerEvent<HTMLDivElement>) => void;
   isCoolingDown: boolean;
   tempPercentage: number;
 }
 
 export const Gauge: React.FC<GaugeProps> = ({
   gaugeRef,
-  handleMouseDown,
-  handleTouchStart,
+  handlePointerDown,
   isCoolingDown,
   tempPercentage,
 }) => {
@@ -23,10 +21,12 @@ export const Gauge: React.FC<GaugeProps> = ({
     <div
       ref={gaugeRef}
       className={gaugeClasses}
-      onMouseDown={handleMouseDown}
-      onTouchStart={handleTouchStart}
+      onPointerDown={handlePointerDown}
     >
-      <div className="bg-blue-500 w-full rounded-md" style={{ height: `${tempPercentage}%` }} />
+      <div
+        className="bg-blue-500 w-full rounded-md"
+        style={{ height: `${tempPercentage}%` }}
+      />
     </div>
   );
 };

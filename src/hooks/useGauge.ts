@@ -18,54 +18,36 @@ export const useGauge = (
     onTempChange(newTemp);
   }, [gaugeRef, onTempChange, minTemp, maxTemp]);
 
-  const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (isCoolingDown) return;
+  const handlePointerDown = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if (isCoolingDown || !gaugeRef.current) return;
     isDraggingRef.current = true;
+    gaugeRef.current.setPointerCapture(e.pointerId);
     updateTempFromY(e.clientY);
-  }, [isCoolingDown, updateTempFromY]);
-
-  const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
-    if (isCoolingDown) return;
-    isDraggingRef.current = true;
-    updateTempFromY(e.touches[0].clientY);
-  }, [isCoolingDown, updateTempFromY]);
+  }, [isCoolingDown, updateTempFromY, gaugeRef]);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handlePointerMove = (e: PointerEvent) => {
       if (!isDraggingRef.current) return;
       updateTempFromY(e.clientY);
     };
 
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!isDraggingRef.current) return;
-      e.preventDefault();
-      updateTempFromY(e.touches[0].clientY);
-    };
-
-    const handleMouseUp = () => {
-      if (!isDraggingRef.current) return;
+    const handlePointerUp = (e: PointerEvent) => {
+      if (!isDraggingRef.current || !gaugeRef.current) return;
       isDraggingRef.current = false;
+      if (gaugeRef.current.hasPointerCapture(e.pointerId)) {
+        gaugeRef.current.releasePointerCapture(e.pointerId);
+      }
       onTempChangeCommit();
     };
 
-    const handleTouchEnd = () => {
-      if (!isDraggingRef.current) return;
-      isDraggingRef.current = false;
-      onTempChangeCommit();
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
-    window.addEventListener('mouseup', handleMouseUp);
-    window.addEventListener('touchend', handleTouchEnd);
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', handlePointerUp);
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('mouseup', handleMouseUp);
-      window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
     };
-  }, [updateTempFromY, onTempChangeCommit]);
+  }, [updateTempFromY, onTempChangeCommit, gaugeRef]);
 
-  return { handleMouseDown, handleTouchStart };
+  return { handlePointerDown };
 };
