@@ -13,7 +13,7 @@ export const Gauge: React.FC<GaugeProps> = ({
   isCoolingDown,
   tempPercentage,
 }) => {
-  const gaugeClasses = `relative w-20 h-52 bg-gray-200 rounded-lg overflow-hidden border-2 border-gray-300 flex flex-col-reverse ${
+  const gaugeClasses = `relative w-20 h-52 bg-gray-200 rounded-lg overflow-hidden border-2 border-gray-300 flex flex-col-reverse touch-none ${
     isCoolingDown ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
   }`;
 
