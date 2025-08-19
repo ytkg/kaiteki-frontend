@@ -28,6 +28,7 @@ export const useGauge = (
   useEffect(() => {
     const handlePointerMove = (e: PointerEvent) => {
       if (!isDraggingRef.current) return;
+      e.preventDefault();
       updateTempFromY(e.clientY);
     };
 
