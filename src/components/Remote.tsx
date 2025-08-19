@@ -48,7 +48,7 @@ export const Remote: React.FC = () => {
         </div>
         <div className="flex flex-col items-center gap-4">
           <button className={powerButtonClasses} disabled>電源</button>
-          <div className="bg-gray-800 text-green-400 rounded-md px-4 py-2 font-mono flex justify-between items-center">
+          <div className="bg-lcd-bg text-gray-800 rounded-md px-4 py-2 font-mono flex justify-between items-center">
             <div className="text-6xl font-thin">{previewTemp.toFixed(1)}°</div>
             <div className="text-lg">冷房</div>
           </div>
