@@ -18,7 +18,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     >
       <div
         className={`
-          bg-white p-5 rounded-lg shadow-lg relative
+          bg-white p-8 rounded-lg shadow-lg relative w-[320px]
           transform transition-all duration-300 ease-in-out
           ${isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}
         `}

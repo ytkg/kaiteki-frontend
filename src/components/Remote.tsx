@@ -34,7 +34,7 @@ export const Remote: React.FC = () => {
   const tempPercentage = ((previewTemp - MIN_TEMP) / (MAX_TEMP - MIN_TEMP)) * 100;
 
   return (
-    <div className="bg-white rounded-2xl p-8 shadow-lg relative w-[320px]">
+    <>
       <div className="absolute top-4 right-4 w-9 h-9">
         {isCoolingDown ? (
           <CooldownProgress seconds={cooldownSeconds} />
@@ -58,7 +58,7 @@ export const Remote: React.FC = () => {
           maxTemp={MAX_TEMP}
         />
       </div>
-    </div>
+    </>
   );
 };
 
