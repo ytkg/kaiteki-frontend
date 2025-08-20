@@ -7,17 +7,21 @@ type ModalProps = {
 };
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  if (!isOpen) {
-    return null;
-  }
-
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
+      className={`
+        fixed inset-0 z-50 flex justify-center items-center
+        transition-opacity duration-300 ease-in-out
+        ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+      `}
       onClick={onClose}
     >
       <div
-        className="bg-white p-5 rounded-lg shadow-lg relative"
+        className={`
+          bg-white p-5 rounded-lg shadow-lg relative
+          transform transition-all duration-300 ease-in-out
+          ${isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}
+        `}
         onClick={(e) => e.stopPropagation()}
       >
         <button
