@@ -34,33 +34,31 @@ export const Remote: React.FC = () => {
   const tempPercentage = ((previewTemp - MIN_TEMP) / (MAX_TEMP - MIN_TEMP)) * 100;
 
   return (
-    <div className="flex justify-center items-center w-full min-h-screen">
-      <div className="bg-white rounded-2xl p-8 shadow-lg relative w-[320px]">
-        <div className="absolute top-4 right-4 w-9 h-9">
-          {isCoolingDown ? (
-            <CooldownProgress seconds={cooldownSeconds} />
-          ) : (
-            showIndicator && <div className="w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_10px_theme(colors.blue.500)]" />
-          )}
-        </div>
-        <div className="flex flex-col items-center gap-6">
-          <div className="text-6xl font-thin text-gray-800">{previewTemp.toFixed(1)}°</div>
-          <Gauge
-            gaugeRef={gaugeRef}
-            handlePointerDown={handlePointerDown}
-            isCoolingDown={isCoolingDown}
-            tempPercentage={tempPercentage}
-          />
-          <ControlButtons
-            adjustTemp={adjustTemp}
-            isCoolingDown={isCoolingDown}
-            temperature={previewTemp}
-            minTemp={MIN_TEMP}
-            maxTemp={MAX_TEMP}
-          />
-        </div>
+    <>
+      <div className="absolute top-4 right-4 w-9 h-9">
+        {isCoolingDown ? (
+          <CooldownProgress seconds={cooldownSeconds} />
+        ) : (
+          showIndicator && <div className="w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_10px_theme(colors.blue.500)]" />
+        )}
       </div>
-    </div>
+      <div className="flex flex-col items-center gap-6">
+        <div className="text-6xl font-thin text-gray-800">{previewTemp.toFixed(1)}°</div>
+        <Gauge
+          gaugeRef={gaugeRef}
+          handlePointerDown={handlePointerDown}
+          isCoolingDown={isCoolingDown}
+          tempPercentage={tempPercentage}
+        />
+        <ControlButtons
+          adjustTemp={adjustTemp}
+          isCoolingDown={isCoolingDown}
+          temperature={previewTemp}
+          minTemp={MIN_TEMP}
+          maxTemp={MAX_TEMP}
+        />
+      </div>
+    </>
   );
 };
 
