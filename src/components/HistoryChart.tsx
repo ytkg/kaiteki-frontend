@@ -28,7 +28,7 @@ const HistoryChart: React.FC<HistoryChartProps> = ({ data, yAxisMin, yAxisMax })
         data={chartData}
         margin={{
           top: 5,
-          right: 30,
+          right: 0,
           left: 0,
           bottom: 5,
         }}
