@@ -23,7 +23,12 @@ const EnvironmentDataTable: React.FC = () => {
     return <div>エラー: {error.message}</div>;
   }
 
-  const latestData = data?.[0];
+  // Handle the case where data is not yet available
+  if (!data) {
+    return <div>読み込み中...</div>;
+  }
+
+  const latestData = data[0];
 
   return (
     <div className="grid grid-cols-1">
