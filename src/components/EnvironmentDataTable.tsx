@@ -49,7 +49,7 @@ const EnvironmentDataTable: React.FC = () => {
   const latestData = data[0];
 
   return (
-    <div>
+    <div className="grid grid-cols-1">
       <h2 className="text-xl font-semibold mb-2">環境データ</h2>
 
       {latestData && (
