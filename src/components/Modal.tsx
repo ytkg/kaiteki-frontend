@@ -7,31 +7,47 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  const [isRendering, setIsRendering] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
+    let mountTimer: NodeJS.Timeout;
+    let activeTimer: NodeJS.Timeout;
+
     if (isOpen) {
-      setIsRendering(true);
+      setIsMounted(true);
+      // Delay setting active to allow for mounting and initial style application
+      mountTimer = setTimeout(() => {
+        setIsActive(true);
+      }, 10); // Small delay to trigger transition
     } else {
-      const timer = setTimeout(() => setIsRendering(false), 200); // Animation duration
-      return () => clearTimeout(timer);
+      setIsActive(false);
+      // Delay unmounting to allow for exit animation
+      activeTimer = setTimeout(() => {
+        setIsMounted(false);
+      }, 200); // Should match animation duration
     }
+
+    return () => {
+      clearTimeout(mountTimer);
+      clearTimeout(activeTimer);
+    };
   }, [isOpen]);
 
-  if (!isRendering) {
+  if (!isMounted) {
     return null;
   }
 
   return (
     <div
       className={`fixed inset-0 z-50 flex justify-center items-center transition-colors duration-200 ${
-        isOpen ? 'bg-black bg-opacity-50' : 'bg-transparent'
+        isActive ? 'bg-black bg-opacity-50' : 'bg-transparent'
       }`}
       onClick={onClose}
     >
       <div
         className={`bg-white p-8 rounded-lg shadow-xl relative max-w-sm w-full transition-all duration-200 ease-out ${
-          isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
         }`}
         onClick={(e) => e.stopPropagation()} // Prevent closing modal when clicking inside
       >
