@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import { type ReactNode, createContext, useState, useContext } from 'react';
 
 // Define the shape of the context data
 interface SettingsContextType {
