@@ -12,9 +12,11 @@ interface DataItem {
 
 interface HistoryChartProps {
   data: DataItem[];
+  yAxisMin: number;
+  yAxisMax: number;
 }
 
-const HistoryChart: React.FC<HistoryChartProps> = ({ data }) => {
+const HistoryChart: React.FC<HistoryChartProps> = ({ data, yAxisMin, yAxisMax }) => {
   const chartData = data.map(item => ({
     ...item,
     created: new Date(item.created).toLocaleString(),
@@ -33,11 +35,11 @@ const HistoryChart: React.FC<HistoryChartProps> = ({ data }) => {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="created" />
-        <YAxis domain={[18, 'auto']} />
+        <YAxis domain={[yAxisMin, yAxisMax]} />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="d1" stroke="#8884d8" name="室温" className="history-line" />
-        <Line type="monotone" dataKey="d5" stroke="#82ca9d" name="ミスナール体感温度" className="history-line" />
+        <Line type="monotone" dataKey="d1" stroke="#8884d8" name="室温" />
+        <Line type="monotone" dataKey="d5" stroke="#82ca9d" name="ミスナール体感温度" />
       </LineChart>
     </ResponsiveContainer>
   );

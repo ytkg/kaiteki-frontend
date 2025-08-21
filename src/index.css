@@ -3,7 +3,3 @@
 body {
   @apply bg-white text-gray-800;
 }
-
-.history-line .recharts-line-dot {
-  visibility: hidden;
-}
