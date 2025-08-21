@@ -9,7 +9,7 @@ const AppContent = () => {
   const location = useLocation();
   const isRemotePage = location.pathname === '/remote';
 
-  const mainClassName = `flex-grow p-4 pb-20 ${
+  const mainClassName = `flex-grow px-4 pt-20 pb-20 ${
     isRemotePage ? 'flex items-center justify-center' : ''
   }`;
 
