@@ -10,26 +10,28 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'vite.svg'],
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'icon-512x512.svg'],
       manifest: {
         name: 'Air Conditioner Remote',
         short_name: 'AC Remote',
         description: 'A simple air conditioner remote control application.',
-        theme_color: '#ffffff',
-        background_color: '#ffffff',
+        theme_color: '#E0F2FE',
+        background_color: '#E0F2FE',
         display: 'fullscreen',
         scope: '/',
         'start_url': '/',
         icons: [
           {
-            src: 'vite.svg',
-            sizes: 'any',
-            type: 'image/svg+xml'
+            src: 'icon-512x512.svg',
+            sizes: '192x192',
+            type: 'image/svg+xml',
+            purpose: 'any maskable'
           },
           {
-            src: 'react.svg',
-            sizes: 'any',
-            type: 'image/svg+xml'
+            src: 'icon-512x512.svg',
+            sizes: '512x512',
+            type: 'image/svg+xml',
+            purpose: 'any maskable'
           }
         ]
       }
