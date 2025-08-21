@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSettings } from '../contexts/SettingsContext';
 
 // Define the type for a single data item
 interface DataItem {
@@ -15,25 +16,38 @@ interface CurrentStatusProps {
 }
 
 const CurrentStatus: React.FC<CurrentStatusProps> = ({ latestData }) => {
+  const { targetTemperature } = useSettings();
+
   if (!latestData) {
     return null; // Or a loading/error state if you prefer
   }
 
   return (
-    <div className="mb-4 p-4 border rounded-lg bg-gray-50">
-      <h3 className="text-lg font-semibold mb-3">最新の状況</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-        <div>
-          <p className="text-sm text-gray-600">室温</p>
-          <p className="text-2xl font-bold">{latestData.d1}°C</p>
+    <div className="mb-4">
+      <div className="mb-4">
+        <h3 className="text-lg font-semibold mb-2">現在の状況</h3>
+        <div className="grid grid-cols-2 gap-4 text-center">
+          <div className="p-4 border rounded-lg bg-gray-50">
+            <p className="text-sm text-gray-600">室温</p>
+            <p className="text-2xl font-bold">{latestData.d1}°C</p>
+          </div>
+          <div className="p-4 border rounded-lg bg-gray-50">
+            <p className="text-sm text-gray-600">体感温度</p>
+            <p className="text-2xl font-bold">{latestData.d5}°C</p>
+          </div>
         </div>
-        <div>
-          <p className="text-sm text-gray-600">ミスナール体感温度</p>
-          <p className="text-2xl font-bold">{latestData.d5}°C</p>
-        </div>
-        <div>
-          <p className="text-sm text-gray-600">設定温度</p>
-          <p className="text-2xl font-bold">{latestData.d4}°C</p>
+      </div>
+      <div>
+        <h3 className="text-lg font-semibold mb-2">設定</h3>
+        <div className="grid grid-cols-2 gap-4 text-center">
+          <div className="p-4 border rounded-lg bg-gray-50">
+            <p className="text-sm text-gray-600">目標の体感温度</p>
+            <p className="text-2xl font-bold">{targetTemperature.toFixed(1)}°C</p>
+          </div>
+          <div className="p-4 border rounded-lg bg-gray-50">
+            <p className="text-sm text-gray-600">エアコンの設定温度</p>
+            <p className="text-2xl font-bold">{latestData.d4}°C</p>
+          </div>
         </div>
       </div>
     </div>
