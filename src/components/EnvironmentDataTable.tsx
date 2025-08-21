@@ -52,21 +52,21 @@ const EnvironmentDataTable: React.FC = () => {
       <table className="min-w-full bg-white border border-gray-200">
         <thead className="bg-gray-100">
           <tr>
-            <th className="px-4 py-2 border-b">作成日時</th>
-            <th className="px-4 py-2 border-b">室温</th>
-            <th className="px-4 py-2 border-b">湿度</th>
-            <th className="px-4 py-2 border-b">ミスナール体感温度</th>
-            <th className="px-4 py-2 border-b">設定温度</th>
+            <th className="px-4 py-2 border-b text-left">作成日時</th>
+            <th className="px-4 py-2 border-b text-right">室温</th>
+            <th className="px-4 py-2 border-b text-right">湿度</th>
+            <th className="px-4 py-2 border-b text-right">ミスナール体感温度</th>
+            <th className="px-4 py-2 border-b text-right">設定温度</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item, index) => (
             <tr key={index} className="hover:bg-gray-50">
               <td className="px-4 py-2 border-b">{new Date(item.created).toLocaleString()}</td>
-              <td className="px-4 py-2 border-b">{item.d1}</td>
-              <td className="px-4 py-2 border-b">{item.d2}</td>
-              <td className="px-4 py-2 border-b">{item.d5}</td>
-              <td className="px-4 py-2 border-b">{item.d4}</td>
+              <td className="px-4 py-2 border-b text-right">{item.d1}</td>
+              <td className="px-4 py-2 border-b text-right">{item.d2}</td>
+              <td className="px-4 py-2 border-b text-right">{item.d5}</td>
+              <td className="px-4 py-2 border-b text-right">{item.d4}</td>
             </tr>
           ))}
         </tbody>
