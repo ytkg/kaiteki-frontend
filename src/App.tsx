@@ -1,25 +1,36 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import DashboardPage from './pages/DashboardPage';
 import RemotePage from './pages/RemotePage';
 
+const AppContent = () => {
+  const location = useLocation();
+  const isRemotePage = location.pathname === '/remote';
+
+  const mainClassName = `flex-grow p-4 pb-20 ${
+    isRemotePage ? 'flex items-center justify-center' : ''
+  }`;
+
+  return (
+    <div className="flex flex-col min-h-screen bg-gray-100">
+      <Header />
+      <main className={mainClassName}>
+        <Routes>
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/remote" element={<RemotePage />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen bg-gray-100">
-        <Header />
-        <main className="flex-grow p-4 pb-20">
-          <div className="h-full">
-            <Routes>
-              <Route path="/" element={<DashboardPage />} />
-              <Route path="/remote" element={<RemotePage />} />
-            </Routes>
-          </div>
-        </main>
-        <Footer />
-      </div>
+      <AppContent />
     </Router>
   );
 }
