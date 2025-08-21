@@ -10,7 +10,7 @@ interface DataItem {
   created: string;
 }
 
-const DataTable: React.FC = () => {
+const EnvironmentDataTable: React.FC = () => {
   const [data, setData] = useState<DataItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -48,16 +48,15 @@ const DataTable: React.FC = () => {
 
   return (
     <div className="overflow-x-auto">
-      <h2 className="text-xl font-semibold mb-2">データテーブル</h2>
+      <h2 className="text-xl font-semibold mb-2">環境データ</h2>
       <table className="min-w-full bg-white border border-gray-200">
         <thead className="bg-gray-100">
           <tr>
             <th className="px-4 py-2 border-b">作成日時</th>
-            <th className="px-4 py-2 border-b">d1</th>
-            <th className="px-4 py-2 border-b">d2</th>
-            <th className="px-4 py-2 border-b">d3</th>
-            <th className="px-4 py-2 border-b">d4</th>
-            <th className="px-4 py-2 border-b">d5</th>
+            <th className="px-4 py-2 border-b">室温</th>
+            <th className="px-4 py-2 border-b">湿度</th>
+            <th className="px-4 py-2 border-b">ミスナール体感温度</th>
+            <th className="px-4 py-2 border-b">設定温度</th>
           </tr>
         </thead>
         <tbody>
@@ -66,9 +65,8 @@ const DataTable: React.FC = () => {
               <td className="px-4 py-2 border-b">{new Date(item.created).toLocaleString()}</td>
               <td className="px-4 py-2 border-b">{item.d1}</td>
               <td className="px-4 py-2 border-b">{item.d2}</td>
-              <td className="px-4 py-2 border-b">{item.d3}</td>
-              <td className="px-4 py-2 border-b">{item.d4}</td>
               <td className="px-4 py-2 border-b">{item.d5}</td>
+              <td className="px-4 py-2 border-b">{item.d4}</td>
             </tr>
           ))}
         </tbody>
@@ -77,4 +75,4 @@ const DataTable: React.FC = () => {
   );
 };
 
-export default DataTable;
+export default EnvironmentDataTable;

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import DataTable from './components/DataTable';
+import EnvironmentDataTable from './components/EnvironmentDataTable';
 import Modal from './components/Modal';
 import Remote from './components/Remote';
 
@@ -14,7 +14,7 @@ function App() {
     <div className="App p-4">
       <h1 className="text-2xl font-bold mb-4">ダッシュボード</h1>
       <div className="my-4">
-        <DataTable />
+        <EnvironmentDataTable />
       </div>
       <button
         onClick={openModal}
