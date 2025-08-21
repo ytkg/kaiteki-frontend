@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 
+import { useSettings } from '../contexts/SettingsContext';
 import { useTemperature } from '../hooks/useTemperature';
 import { useCooldown } from '../hooks/useCooldown';
 import { useGauge } from '../hooks/useGauge';
@@ -9,6 +10,7 @@ import { Gauge } from '../components/Gauge';
 import { ControlButtons } from '../components/ControlButtons';
 
 export const RemotePage: React.FC = () => {
+  const { targetTemperature, setTargetTemperature } = useSettings();
   const {
     temperature,
     previewTemp,
@@ -17,7 +19,11 @@ export const RemotePage: React.FC = () => {
     adjustTemp,
     MIN_TEMP,
     MAX_TEMP,
-  } = useTemperature(28.0);
+  } = useTemperature(targetTemperature);
+
+  useEffect(() => {
+    setTargetTemperature(temperature);
+  }, [temperature, setTargetTemperature]);
 
   const { isCoolingDown, showIndicator, cooldownSeconds } = useCooldown(temperature);
 

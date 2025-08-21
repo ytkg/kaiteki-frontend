@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSettings } from '../contexts/SettingsContext';
 
 // Define the type for a single data item
 interface DataItem {
@@ -15,6 +16,8 @@ interface CurrentStatusProps {
 }
 
 const CurrentStatus: React.FC<CurrentStatusProps> = ({ latestData }) => {
+  const { targetTemperature } = useSettings();
+
   if (!latestData) {
     return null; // Or a loading/error state if you prefer
   }
@@ -39,7 +42,7 @@ const CurrentStatus: React.FC<CurrentStatusProps> = ({ latestData }) => {
         <div className="grid grid-cols-2 gap-4 text-center">
           <div className="p-4 border rounded-lg bg-gray-50">
             <p className="text-sm text-gray-600">目標の体感温度</p>
-            <p className="text-2xl font-bold">23.8°C</p>
+            <p className="text-2xl font-bold">{targetTemperature.toFixed(1)}°C</p>
           </div>
           <div className="p-4 border rounded-lg bg-gray-50">
             <p className="text-sm text-gray-600">エアコンの設定温度</p>

@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { SettingsProvider } from './contexts/SettingsContext';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -32,7 +33,9 @@ const AppContent = () => {
 function App() {
   return (
     <Router>
-      <AppContent />
+      <SettingsProvider>
+        <AppContent />
+      </SettingsProvider>
     </Router>
   );
 }
