@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
       <nav className="flex justify-around">
         <NavLink to="/" className={getLinkClassName}>
           <FaHome className="text-2xl" />
-          <span className="text-xs">ダッシュボード</span>
+          <span className="text-xs">ホーム</span>
         </NavLink>
         <NavLink to="/remote" className={getLinkClassName}>
           <FaTv className="text-2xl" />
