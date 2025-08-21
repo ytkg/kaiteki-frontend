@@ -4,11 +4,11 @@ import { useTemperature } from '../hooks/useTemperature';
 import { useCooldown } from '../hooks/useCooldown';
 import { useGauge } from '../hooks/useGauge';
 
-import { CooldownProgress } from './CooldownProgress';
-import { Gauge } from './Gauge';
-import { ControlButtons } from './ControlButtons';
+import { CooldownProgress } from '../components/CooldownProgress';
+import { Gauge } from '../components/Gauge';
+import { ControlButtons } from '../components/ControlButtons';
 
-export const Remote: React.FC = () => {
+export const RemotePage: React.FC = () => {
   const {
     temperature,
     previewTemp,
@@ -34,32 +34,30 @@ export const Remote: React.FC = () => {
   const tempPercentage = ((previewTemp - MIN_TEMP) / (MAX_TEMP - MIN_TEMP)) * 100;
 
   return (
-    <>
-      <div className="absolute top-4 right-4 w-9 h-9">
+    <div className="relative flex flex-col items-center gap-6">
+      <div className="absolute top-0 right-0 w-9 h-9 translate-x-full">
         {isCoolingDown ? (
           <CooldownProgress seconds={cooldownSeconds} />
         ) : (
           showIndicator && <div className="w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_10px_theme(colors.blue.500)]" />
         )}
       </div>
-      <div className="flex flex-col items-center gap-6">
-        <div className="text-6xl font-thin text-gray-800">{previewTemp.toFixed(1)}°</div>
-        <Gauge
-          gaugeRef={gaugeRef}
-          handlePointerDown={handlePointerDown}
-          isCoolingDown={isCoolingDown}
-          tempPercentage={tempPercentage}
-        />
-        <ControlButtons
-          adjustTemp={adjustTemp}
-          isCoolingDown={isCoolingDown}
-          temperature={previewTemp}
-          minTemp={MIN_TEMP}
-          maxTemp={MAX_TEMP}
-        />
-      </div>
-    </>
+      <div className="text-6xl font-thin text-gray-800">{previewTemp.toFixed(1)}°</div>
+      <Gauge
+        gaugeRef={gaugeRef}
+        handlePointerDown={handlePointerDown}
+        isCoolingDown={isCoolingDown}
+        tempPercentage={tempPercentage}
+      />
+      <ControlButtons
+        adjustTemp={adjustTemp}
+        isCoolingDown={isCoolingDown}
+        temperature={previewTemp}
+        minTemp={MIN_TEMP}
+        maxTemp={MAX_TEMP}
+      />
+    </div>
   );
 };
 
-export default Remote;
+export default RemotePage;
