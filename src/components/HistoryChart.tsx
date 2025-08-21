@@ -33,7 +33,7 @@ const HistoryChart: React.FC<HistoryChartProps> = ({ data }) => {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="created" />
-        <YAxis />
+        <YAxis domain={[18, 'auto']} />
         <Tooltip />
         <Legend />
         <Line type="monotone" dataKey="d1" stroke="#8884d8" name="室温" className="history-line" />
