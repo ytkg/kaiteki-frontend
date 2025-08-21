@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import React, { type ReactNode, useState, useEffect } from 'react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -7,13 +7,34 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  if (!isOpen) {
+  const [isRendering, setIsRendering] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsRendering(true);
+    } else {
+      const timer = setTimeout(() => setIsRendering(false), 200); // Animation duration
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
+
+  if (!isRendering) {
     return null;
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
-      <div className="bg-white p-8 rounded-lg shadow-xl relative max-w-sm w-full">
+    <div
+      className={`fixed inset-0 z-50 flex justify-center items-center transition-colors duration-200 ${
+        isOpen ? 'bg-black bg-opacity-50' : 'bg-transparent'
+      }`}
+      onClick={onClose}
+    >
+      <div
+        className={`bg-white p-8 rounded-lg shadow-xl relative max-w-sm w-full transition-all duration-200 ease-out ${
+          isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+        }`}
+        onClick={(e) => e.stopPropagation()} // Prevent closing modal when clicking inside
+      >
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
