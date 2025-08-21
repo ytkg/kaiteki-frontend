@@ -46,12 +46,36 @@ const EnvironmentDataTable: React.FC = () => {
     return <div>エラー: {error}</div>;
   }
 
+  const latestData = data[0];
+
   return (
-    <div className="overflow-x-auto">
+    <div>
       <h2 className="text-xl font-semibold mb-2">環境データ</h2>
-      <table className="min-w-full bg-white border border-gray-200">
-        <thead className="bg-gray-100">
-          <tr>
+
+      {latestData && (
+        <div className="mb-4 p-4 border rounded-lg bg-gray-50">
+          <h3 className="text-lg font-semibold mb-3">最新の状況</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+            <div>
+              <p className="text-sm text-gray-600">室温</p>
+              <p className="text-2xl font-bold">{latestData.d1}°C</p>
+            </div>
+            <div>
+              <p className="text-sm text-gray-600">ミスナール体感温度</p>
+              <p className="text-2xl font-bold">{latestData.d5}°C</p>
+            </div>
+            <div>
+              <p className="text-sm text-gray-600">設定温度</p>
+              <p className="text-2xl font-bold">{latestData.d4}°C</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border border-gray-200">
+          <thead className="bg-gray-100">
+            <tr>
             <th className="px-4 py-2 border-b text-left whitespace-nowrap">作成日時</th>
             <th className="px-4 py-2 border-b text-right whitespace-nowrap">室温</th>
             <th className="px-4 py-2 border-b text-right whitespace-nowrap">湿度</th>
@@ -71,6 +95,7 @@ const EnvironmentDataTable: React.FC = () => {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 };
