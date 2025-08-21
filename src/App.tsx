@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import DashboardPage from './pages/DashboardPage';
 import RemotePage from './pages/RemotePage';
+import DataPage from './pages/DataPage';
 
 const AppContent = () => {
   const location = useLocation();
@@ -19,6 +20,7 @@ const AppContent = () => {
       <main className={mainClassName}>
         <Routes>
           <Route path="/" element={<DashboardPage />} />
+          <Route path="/data" element={<DataPage />} />
           <Route path="/remote" element={<RemotePage />} />
         </Routes>
       </main>

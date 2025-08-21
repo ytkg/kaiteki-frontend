@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaHome, FaTv } from 'react-icons/fa';
+import { FaHome, FaChartBar, FaTv } from 'react-icons/fa';
 
 const Footer: React.FC = () => {
   const getLinkClassName = ({ isActive }: { isActive: boolean }) => {
@@ -16,6 +16,10 @@ const Footer: React.FC = () => {
         <NavLink to="/" className={getLinkClassName}>
           <FaHome className="text-2xl" />
           <span className="text-xs">ホーム</span>
+        </NavLink>
+        <NavLink to="/data" className={getLinkClassName}>
+          <FaChartBar className="text-2xl" />
+          <span className="text-xs">データ</span>
         </NavLink>
         <NavLink to="/remote" className={getLinkClassName}>
           <FaTv className="text-2xl" />
