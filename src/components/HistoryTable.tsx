@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import useSWR from 'swr';
 
 // Define the type for a single data item
 interface DataItem {
@@ -10,40 +11,18 @@ interface DataItem {
   created: string;
 }
 
+// Define the fetcher function
+const fetcher = (url: string) => fetch(url).then(res => res.json());
+
 const HistoryTable: React.FC = () => {
-  const [data, setData] = useState<DataItem[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, error, isLoading } = useSWR<DataItem[]>('https://ambidata.io/api/v2/channels/93486/data?readKey=ef5adfcf2dea1333&n=300', fetcher);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://ambidata.io/api/v2/channels/93486/data?readKey=ef5adfcf2dea1333&n=300');
-        if (!response.ok) {
-          throw new Error('データの取得に失敗しました');
-        }
-        const result: DataItem[] = await response.json();
-        setData(result);
-      } catch (err) {
-        if (err instanceof Error) {
-            setError(err.message);
-        } else {
-            setError('不明なエラーが発生しました');
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []); // Empty dependency array means this effect runs once on mount
-
-  if (loading) {
+  if (isLoading) {
     return <div>読み込み中...</div>;
   }
 
-  if (error) {
-    return <div>エラー: {error}</div>;
+  if (error || !data) {
+    return <div>エラー: {error ? error.message : 'データの取得に失敗しました'}</div>;
   }
 
   return (
