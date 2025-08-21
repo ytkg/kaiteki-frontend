@@ -35,30 +35,28 @@ export const RemotePage: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center h-full">
-      <div className="relative bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
-        <div className="absolute top-4 right-4 w-9 h-9">
+      <div className="relative flex flex-col items-center gap-6">
+        <div className="absolute top-0 right-0 w-9 h-9 translate-x-full">
           {isCoolingDown ? (
             <CooldownProgress seconds={cooldownSeconds} />
           ) : (
             showIndicator && <div className="w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_10px_theme(colors.blue.500)]" />
           )}
         </div>
-        <div className="flex flex-col items-center gap-6">
-          <div className="text-6xl font-thin text-gray-800">{previewTemp.toFixed(1)}°</div>
-          <Gauge
-            gaugeRef={gaugeRef}
-            handlePointerDown={handlePointerDown}
-            isCoolingDown={isCoolingDown}
-            tempPercentage={tempPercentage}
-          />
-          <ControlButtons
-            adjustTemp={adjustTemp}
-            isCoolingDown={isCoolingDown}
-            temperature={previewTemp}
-            minTemp={MIN_TEMP}
-            maxTemp={MAX_TEMP}
-          />
-        </div>
+        <div className="text-6xl font-thin text-gray-800">{previewTemp.toFixed(1)}°</div>
+        <Gauge
+          gaugeRef={gaugeRef}
+          handlePointerDown={handlePointerDown}
+          isCoolingDown={isCoolingDown}
+          tempPercentage={tempPercentage}
+        />
+        <ControlButtons
+          adjustTemp={adjustTemp}
+          isCoolingDown={isCoolingDown}
+          temperature={previewTemp}
+          minTemp={MIN_TEMP}
+          maxTemp={MAX_TEMP}
+        />
       </div>
     </div>
   );

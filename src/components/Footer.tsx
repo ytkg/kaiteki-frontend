@@ -1,23 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaHome, FaCog, FaTv } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
+import { FaHome, FaTv } from 'react-icons/fa';
 
 const Footer: React.FC = () => {
+  const getLinkClassName = ({ isActive }: { isActive: boolean }) => {
+    const baseClasses = 'flex flex-col items-center';
+    return isActive
+      ? `${baseClasses} text-yellow-400`
+      : `${baseClasses} text-white hover:text-gray-300`;
+  };
+
   return (
     <footer className="fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4">
       <nav className="flex justify-around">
-        <Link to="/" className="flex flex-col items-center hover:text-gray-300">
+        <NavLink to="/" className={getLinkClassName}>
           <FaHome className="text-2xl" />
-          <span className="text-xs">Home</span>
-        </Link>
-        <Link to="/settings" className="flex flex-col items-center hover:text-gray-300">
-          <FaCog className="text-2xl" />
-          <span className="text-xs">Settings</span>
-        </Link>
-        <Link to="/remote" className="flex flex-col items-center hover:text-gray-300">
+          <span className="text-xs">ダッシュボード</span>
+        </NavLink>
+        <NavLink to="/remote" className={getLinkClassName}>
           <FaTv className="text-2xl" />
           <span className="text-xs">リモコン</span>
-        </Link>
+        </NavLink>
       </nav>
     </footer>
   );
