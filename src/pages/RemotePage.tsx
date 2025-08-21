@@ -4,11 +4,11 @@ import { useTemperature } from '../hooks/useTemperature';
 import { useCooldown } from '../hooks/useCooldown';
 import { useGauge } from '../hooks/useGauge';
 
-import { CooldownProgress } from './CooldownProgress';
-import { Gauge } from './Gauge';
-import { ControlButtons } from './ControlButtons';
+import { CooldownProgress } from '../components/CooldownProgress';
+import { Gauge } from '../components/Gauge';
+import { ControlButtons } from '../components/ControlButtons';
 
-export const Remote: React.FC = () => {
+export const RemotePage: React.FC = () => {
   const {
     temperature,
     previewTemp,
@@ -62,4 +62,4 @@ export const Remote: React.FC = () => {
   );
 };
 
-export default Remote;
+export default RemotePage;
