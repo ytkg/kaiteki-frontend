@@ -4,7 +4,7 @@ import { SettingsContext } from './SettingsContextObject';
 
 // Create the provider component
 export const SettingsProvider = ({ children }: { children: ReactNode }) => {
-  const [targetTemperature, setTargetTemperature] = useState<number>(28.0); // Default initial temperature
+  const [targetTemperature, setTargetTemperature] = useState<number>(23.8); // Default initial temperature
 
   const value = { targetTemperature, setTargetTemperature };
 
