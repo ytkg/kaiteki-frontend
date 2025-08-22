@@ -1,5 +1,6 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { formatTimestamp } from '../utils/date';
 
 interface DataItem {
   d1: number;
@@ -19,7 +20,7 @@ interface HistoryChartProps {
 const HistoryChart: React.FC<HistoryChartProps> = ({ data, yAxisMin, yAxisMax }) => {
   const chartData = data.map(item => ({
     ...item,
-    created: new Date(item.created).toLocaleString(),
+    created: formatTimestamp(item.created),
   })).reverse(); // Reverse the data to show oldest first
 
   return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatTimestamp } from '../utils/date';
 
 // Define the type for a single data item
 interface DataItem {
@@ -30,7 +31,7 @@ const HistoryTable: React.FC<HistoryTableProps> = ({ data }) => {
         <tbody>
           {data.map((item, index) => (
             <tr key={index} className="hover:bg-gray-50">
-              <td className="px-4 py-2 border-b whitespace-nowrap">{new Date(item.created).toLocaleString()}</td>
+              <td className="px-4 py-2 border-b whitespace-nowrap">{formatTimestamp(item.created)}</td>
               <td className="px-4 py-2 border-b text-right whitespace-nowrap">{item.d1}</td>
               <td className="px-4 py-2 border-b text-right whitespace-nowrap">{item.d2}</td>
               <td className="px-4 py-2 border-b text-right whitespace-nowrap">{item.d5}</td>
