@@ -14,8 +14,9 @@ interface DataItem {
 // Define the fetcher function
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
-export function useHistoryData() {
-  const { data, error, isLoading } = useSWR<DataItem[]>('https://ambidata.io/api/v2/channels/93486/data?readKey=ef5adfcf2dea1333&n=300', fetcher);
+export function useHistoryData(count = 300) {
+  const url = `https://ambidata.io/api/v2/channels/93486/data?readKey=ef5adfcf2dea1333&n=${count}`;
+  const { data, error, isLoading } = useSWR<DataItem[]>(url, fetcher);
 
   const transformedData = data?.map(item => ({
     ...item,

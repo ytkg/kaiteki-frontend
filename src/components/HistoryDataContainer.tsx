@@ -4,7 +4,7 @@ import HistoryTable from './HistoryTable';
 import { useHistoryData } from '../hooks/useHistoryData';
 
 const HistoryDataContainer: React.FC = () => {
-  const { data, error, isLoading } = useHistoryData();
+  const { data, error, isLoading } = useHistoryData(300);
 
   if (isLoading) {
     return <div>読み込み中...</div>;
