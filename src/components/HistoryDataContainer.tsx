@@ -2,6 +2,7 @@ import React from 'react';
 import useSWR from 'swr';
 import HistoryChart from './HistoryChart';
 import HistoryTable from './HistoryTable';
+import { formatTimestamp } from '../utils/date';
 
 // Define the type for a single data item
 interface DataItem {
@@ -27,17 +28,22 @@ const HistoryDataContainer: React.FC = () => {
     return <div>エラー: {error ? error.message : 'データの取得に失敗しました'}</div>;
   }
 
-  const allValues = data.flatMap(item => [item.d1, item.d5]);
+  const transformedData = data.map(item => ({
+    ...item,
+    created: formatTimestamp(item.created),
+  }));
+
+  const allValues = transformedData.flatMap(item => [item.d1, item.d5]);
   const dataMin = Math.min(...allValues);
   const dataMax = Math.max(...allValues);
 
   return (
     <>
       <div className="my-4">
-        <HistoryChart data={data} yAxisMin={dataMin - 2} yAxisMax={dataMax + 2} />
+        <HistoryChart data={transformedData} yAxisMin={dataMin - 2} yAxisMax={dataMax + 2} />
       </div>
       <div className="my-4">
-        <HistoryTable data={data} />
+        <HistoryTable data={transformedData} />
       </div>
     </>
   );

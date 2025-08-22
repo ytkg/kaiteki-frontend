@@ -7,12 +7,12 @@ function floorDateTo5Minutes(dt: Date): Date {
 }
 
 /**
- * Formats a date string by flooring it to the nearest 5 minutes and converting to a locale string.
+ * Formats a date string by flooring it to the nearest 5 minutes and converting to an ISO string.
  * @param dateString The date string to format.
- * @returns The formatted date string.
+ * @returns The formatted ISO date string.
  */
 export function formatTimestamp(dateString: string): string {
   const date = new Date(dateString);
   const flooredDate = floorDateTo5Minutes(date);
-  return flooredDate.toLocaleString();
+  return flooredDate.toISOString();
 }
