@@ -1,9 +1,71 @@
-import React from 'react';
-import RemoteContainer from '../components/RemoteContainer';
+import React, { useRef, useEffect } from 'react';
+
+import { useSettings } from '../contexts/settings';
+import { useTemperature } from '../hooks/useTemperature';
+import { useCooldown } from '../hooks/useCooldown';
+import { useGauge } from '../hooks/useGauge';
+
+import { CooldownProgress } from '../components/CooldownProgress';
+import { Gauge } from '../components/Gauge';
+import { ControlButtons } from '../components/ControlButtons';
 
 const RemotePage: React.FC = () => {
+  const { targetTemperature, setTargetTemperature } = useSettings();
+  const {
+    temperature,
+    previewTemp,
+    handlePreviewTempChange,
+    commitTemp,
+    adjustTemp,
+    MIN_TEMP,
+    MAX_TEMP,
+  } = useTemperature(targetTemperature);
+
+  useEffect(() => {
+    setTargetTemperature(temperature);
+  }, [temperature, setTargetTemperature]);
+
+  const { isCoolingDown, showIndicator, cooldownSeconds } = useCooldown(temperature);
+
+  const gaugeRef = useRef<HTMLDivElement>(null);
+  const { handlePointerDown } = useGauge(
+    gaugeRef,
+    handlePreviewTempChange,
+    commitTemp,
+    isCoolingDown,
+    MIN_TEMP,
+    MAX_TEMP
+  );
+
+  const tempPercentage = ((previewTemp - MIN_TEMP) / (MAX_TEMP - MIN_TEMP)) * 100;
+
   return (
-    <RemoteContainer />
+    <div>
+      <h2 className="text-2xl font-bold mb-4 text-center">目標の体感温度設定</h2>
+      <div className="relative flex flex-col items-center gap-6">
+        <div className="absolute top-0 right-0 w-9 h-9 translate-x-full">
+          {isCoolingDown ? (
+            <CooldownProgress seconds={cooldownSeconds} />
+          ) : (
+            showIndicator && <div className="w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_10px_theme(colors.blue.500)]" />
+          )}
+        </div>
+        <div className="text-6xl font-thin text-gray-800">{previewTemp.toFixed(1)}°</div>
+        <Gauge
+          gaugeRef={gaugeRef}
+          handlePointerDown={handlePointerDown}
+          isCoolingDown={isCoolingDown}
+          tempPercentage={tempPercentage}
+        />
+        <ControlButtons
+          adjustTemp={adjustTemp}
+          isCoolingDown={isCoolingDown}
+          temperature={previewTemp}
+          minTemp={MIN_TEMP}
+          maxTemp={MAX_TEMP}
+        />
+      </div>
+    </div>
   );
 };
 
