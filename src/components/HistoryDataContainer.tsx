@@ -15,14 +15,14 @@ const HistoryDataContainer: React.FC = () => {
   }
 
   return (
-    <div className="grid grid-rows-[auto_1fr] h-full gap-4 py-4">
-      <div className="overflow-hidden">
+    <>
+      <div className="sticky top-0 z-10 bg-gray-100 py-4">
         <HistoryChart data={data} targetDataKeys={['d1', 'd5']} />
       </div>
-      <div className="overflow-y-auto">
+      <div className="my-4">
         <HistoryTable data={data} />
       </div>
-    </div>
+    </>
   );
 };
 
