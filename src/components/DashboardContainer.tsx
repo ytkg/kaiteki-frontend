@@ -15,7 +15,7 @@ const DashboardContainer: React.FC = () => {
   }
 
   const latestData = data[0];
-  const oddData = data.filter((_, index) => index % 2 === 0 && index < 36);
+  const oddData = data.filter(item => item.cmnt && item.cmnt.length > 0).slice(0, 36);
 
   return (
     <>

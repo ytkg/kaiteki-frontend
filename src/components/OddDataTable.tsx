@@ -7,6 +7,7 @@ interface DataItem {
   d3: number;
   d4: number;
   d5: number;
+  cmnt: string;
   created: string;
 }
 
@@ -23,20 +24,14 @@ const OddDataTable: React.FC<OddDataTableProps> = ({ data }) => {
           <thead className="bg-gray-100">
             <tr>
               <th className="sticky left-0 bg-gray-100 px-4 py-2 border-b text-left whitespace-nowrap">作成日時</th>
-              <th className="px-4 py-2 border-b text-right whitespace-nowrap">室温</th>
-              <th className="px-4 py-2 border-b text-right whitespace-nowrap">湿度</th>
-              <th className="px-4 py-2 border-b text-right whitespace-nowrap">ミスナール体感温度</th>
-              <th className="px-4 py-2 border-b text-right whitespace-nowrap">設定温度</th>
+              <th className="px-4 py-2 border-b text-left whitespace-nowrap">コメント</th>
             </tr>
           </thead>
           <tbody>
             {data.map((item, index) => (
               <tr key={index} className="hover:bg-gray-50">
                 <td className="sticky left-0 bg-white px-4 py-2 border-b whitespace-nowrap">{new Date(item.created).toLocaleString()}</td>
-                <td className="px-4 py-2 border-b text-right whitespace-nowrap">{item.d1}</td>
-                <td className="px-4 py-2 border-b text-right whitespace-nowrap">{item.d2}</td>
-                <td className="px-4 py-2 border-b text-right whitespace-nowrap">{item.d5}</td>
-                <td className="px-4 py-2 border-b text-right whitespace-nowrap">{item.d4}</td>
+                <td className="px-4 py-2 border-b text-left whitespace-nowrap">{item.cmnt}</td>
               </tr>
             ))}
           </tbody>
