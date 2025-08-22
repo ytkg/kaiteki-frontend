@@ -23,6 +23,7 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
 };
 
 // Create a custom hook for easy access
+// eslint-disable-next-line react-refresh/only-export-components
 export const useSettings = () => {
   const context = useContext(SettingsContext);
   if (context === undefined) {
