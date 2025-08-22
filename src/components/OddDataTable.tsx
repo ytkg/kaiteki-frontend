@@ -19,23 +19,13 @@ const OddDataTable: React.FC<OddDataTableProps> = ({ data }) => {
   return (
     <div className="my-4">
       <h3 className="text-lg font-semibold mb-3">サマリー</h3>
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="sticky left-0 bg-gray-100 px-4 py-2 border-b text-left whitespace-nowrap">作成日時</th>
-              <th className="px-4 py-2 border-b text-left whitespace-nowrap">コメント</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item, index) => (
-              <tr key={index} className="hover:bg-gray-50">
-                <td className="sticky left-0 bg-white px-4 py-2 border-b whitespace-nowrap">{new Date(item.created).toLocaleString()}</td>
-                <td className="px-4 py-2 border-b text-left whitespace-nowrap">{item.cmnt}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="space-y-4">
+        {data.map((item, index) => (
+          <div key={index} className="p-4 border rounded-lg bg-gray-50">
+            <p className="text-gray-800">{item.cmnt}</p>
+            <p className="text-sm text-gray-500 mt-2">{new Date(item.created).toLocaleString()}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
