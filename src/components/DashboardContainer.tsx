@@ -4,7 +4,7 @@ import OddDataTable from './OddDataTable';
 import { useHistoryData } from '../hooks/useHistoryData';
 
 const DashboardContainer: React.FC = () => {
-  const { data, error, isLoading } = useHistoryData(36);
+  const { data, error, isLoading } = useHistoryData(100);
 
   if (isLoading) {
     return <div>読み込み中...</div>;
@@ -15,7 +15,7 @@ const DashboardContainer: React.FC = () => {
   }
 
   const latestData = data[0];
-  const oddData = data.filter(item => item.cmnt && item.cmnt.length > 0).slice(0, 36);
+  const oddData = data.filter(item => item.cmnt && item.cmnt.length > 0).slice(0, 10);
 
   return (
     <>

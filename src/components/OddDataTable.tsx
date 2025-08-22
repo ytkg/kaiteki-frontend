@@ -23,7 +23,7 @@ const OddDataTable: React.FC<OddDataTableProps> = ({ data }) => {
         {data.map((item, index) => (
           <div key={index} className={`p-3 ${index < data.length - 1 ? 'border-b border-gray-200' : ''}`}>
             <p className="text-sm text-gray-800">{item.cmnt}</p>
-            <p className="text-xs text-gray-500 mt-1">{new Date(item.created).toLocaleString()}</p>
+            <p className="text-xs text-gray-500 mt-1 text-right">{new Date(item.created).toLocaleString()}</p>
           </div>
         ))}
       </div>
