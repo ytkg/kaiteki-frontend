@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSettings } from '../contexts/SettingsContext';
+import { useSettings } from '../hooks/useSettings';
 import Modal from './Modal';
 import RemoteContainer from './RemoteContainer';
 import HistoryChart from './HistoryChart';

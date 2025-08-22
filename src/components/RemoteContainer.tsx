@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-import { useSettings } from '../contexts/SettingsContext';
+import { useSettings } from '../hooks/useSettings';
 import { useTemperature } from '../hooks/useTemperature';
 import { useCooldown } from '../hooks/useCooldown';
 import { useGauge } from '../hooks/useGauge';

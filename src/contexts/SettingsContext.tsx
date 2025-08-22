@@ -1,13 +1,6 @@
-import { type ReactNode, createContext, useState, useContext } from 'react';
+import { type ReactNode, useState } from 'react';
 
-// Define the shape of the context data
-interface SettingsContextType {
-  targetTemperature: number;
-  setTargetTemperature: (temp: number) => void;
-}
-
-// Create the context with a default value
-const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
+import { SettingsContext } from './SettingsContextObject';
 
 // Create the provider component
 export const SettingsProvider = ({ children }: { children: ReactNode }) => {
@@ -22,11 +15,4 @@ export const SettingsProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Create a custom hook for easy access
-export const useSettings = () => {
-  const context = useContext(SettingsContext);
-  if (context === undefined) {
-    throw new Error('useSettings must be used within a SettingsProvider');
-  }
-  return context;
-};
+// The useSettings hook is now in src/hooks/useSettings.ts
