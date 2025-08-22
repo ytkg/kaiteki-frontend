@@ -23,7 +23,7 @@ const HistoryChart: React.FC<HistoryChartProps> = ({ data, yAxisMin, yAxisMax })
   })).reverse(); // Reverse the data to show oldest first
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
+    <ResponsiveContainer width="100%" height={200}>
       <LineChart
         data={chartData}
         margin={{
