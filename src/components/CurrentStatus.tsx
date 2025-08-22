@@ -33,9 +33,9 @@ const CurrentStatus: React.FC<CurrentStatusProps> = ({ latestData, historyData }
   const closeModal = () => setModalContent(null);
 
   const modalTitles = {
-    d1: '室温の履歴',
-    d5: '体感温度の履歴',
-    d4: 'エアコン設定温度の履歴',
+    d1: '室温',
+    d5: '体感温度',
+    d4: 'エアコン設定温度',
     remote: '目標の体感温度設定',
   };
 
