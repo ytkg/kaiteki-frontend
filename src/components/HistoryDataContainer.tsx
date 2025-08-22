@@ -17,13 +17,13 @@ const HistoryDataContainer: React.FC = () => {
   return (
     <div className="space-y-4">
       <div>
-        <h3 className="text-lg font-semibold mb-2 ml-1">温度推移</h3>
+        <h3 className="text-lg font-semibold mb-1">温度推移</h3>
         <div className="border rounded-lg bg-white p-4">
           <HistoryChart data={data} targetDataKeys={['d1', 'd5']} />
         </div>
       </div>
       <div>
-        <h3 className="text-lg font-semibold mb-2 ml-1">履歴データ</h3>
+        <h3 className="text-lg font-semibold mb-1">履歴データ</h3>
         <div className="border rounded-lg bg-white p-4">
           <HistoryList data={data} />
         </div>

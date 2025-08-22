@@ -23,20 +23,20 @@ const HistoryList: React.FC<HistoryListProps> = ({ data }) => {
             <p className="text-sm font-semibold">{new Date(item.created).toLocaleString('ja-JP', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</p>
           </div>
           <div className="mt-2 text-sm">
-            <div className="flex items-center justify-between flex-wrap gap-x-4 gap-y-1">
-              <div className="flex items-center gap-2">
+            <div className="flex items-center gap-x-4 overflow-x-auto pb-2">
+              <div className="flex items-center gap-2 flex-shrink-0">
                 <span className="text-gray-500">室温:</span>
                 <span className="font-medium">{item.d1}°C</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-shrink-0">
                 <span className="text-gray-500">湿度:</span>
                 <span className="font-medium">{item.d2}%</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-shrink-0">
                 <span className="text-gray-500">体感温度:</span>
                 <span className="font-medium">{item.d5}°C</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-shrink-0">
                 <span className="text-gray-500">設定温度:</span>
                 <span className="font-medium">{item.d4}°C</span>
               </div>
