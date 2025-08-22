@@ -11,8 +11,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    let mountTimer: NodeJS.Timeout;
-    let activeTimer: NodeJS.Timeout;
+    let mountTimer: ReturnType<typeof setTimeout>;
+    let activeTimer: ReturnType<typeof setTimeout>;
 
     if (isOpen) {
       setIsMounted(true);
