@@ -63,7 +63,6 @@ const CurrentStatus: React.FC<CurrentStatusProps> = ({ latestData }) => {
       </div>
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <h2 className="text-2xl font-bold mb-4 text-center">目標の体感温度設定</h2>
         <RemoteContainer />
       </Modal>
     </>

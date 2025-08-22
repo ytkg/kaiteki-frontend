@@ -40,29 +40,32 @@ const RemoteContainer: React.FC = () => {
   const tempPercentage = ((previewTemp - MIN_TEMP) / (MAX_TEMP - MIN_TEMP)) * 100;
 
   return (
-    <div className="relative flex flex-col items-center gap-6">
-      <div className="absolute top-0 right-0 w-9 h-9 translate-x-full">
-        {isCoolingDown ? (
-          <CooldownProgress seconds={cooldownSeconds} />
-        ) : (
-          showIndicator && <div className="w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_10px_theme(colors.blue.500)]" />
-        )}
+    <>
+      <h2 className="text-2xl font-bold mb-4 text-center">目標の体感温度設定</h2>
+      <div className="relative flex flex-col items-center gap-6">
+        <div className="absolute top-0 right-0 w-9 h-9 translate-x-full">
+          {isCoolingDown ? (
+            <CooldownProgress seconds={cooldownSeconds} />
+          ) : (
+            showIndicator && <div className="w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_10px_theme(colors.blue.500)]" />
+          )}
+        </div>
+        <div className="text-6xl font-thin text-gray-800">{previewTemp.toFixed(1)}°</div>
+        <Gauge
+          gaugeRef={gaugeRef}
+          handlePointerDown={handlePointerDown}
+          isCoolingDown={isCoolingDown}
+          tempPercentage={tempPercentage}
+        />
+        <ControlButtons
+          adjustTemp={adjustTemp}
+          isCoolingDown={isCoolingDown}
+          temperature={previewTemp}
+          minTemp={MIN_TEMP}
+          maxTemp={MAX_TEMP}
+        />
       </div>
-      <div className="text-6xl font-thin text-gray-800">{previewTemp.toFixed(1)}°</div>
-      <Gauge
-        gaugeRef={gaugeRef}
-        handlePointerDown={handlePointerDown}
-        isCoolingDown={isCoolingDown}
-        tempPercentage={tempPercentage}
-      />
-      <ControlButtons
-        adjustTemp={adjustTemp}
-        isCoolingDown={isCoolingDown}
-        temperature={previewTemp}
-        minTemp={MIN_TEMP}
-        maxTemp={MAX_TEMP}
-      />
-    </div>
+    </>
   );
 };
 
