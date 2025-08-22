@@ -16,7 +16,7 @@ const HistoryDataContainer: React.FC = () => {
 
   return (
     <>
-      <div className="my-4">
+      <div className="sticky top-0 z-10 bg-gray-100 py-4">
         <HistoryChart data={data} targetDataKeys={['d1', 'd5']} />
       </div>
       <div className="my-4">
