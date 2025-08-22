@@ -14,14 +14,10 @@ const HistoryDataContainer: React.FC = () => {
     return <div>エラー: {error ? error.message : 'データの取得に失敗しました'}</div>;
   }
 
-  const allValues = data.flatMap(item => [item.d1, item.d5]);
-  const dataMin = Math.min(...allValues);
-  const dataMax = Math.max(...allValues);
-
   return (
     <>
       <div className="my-4">
-        <HistoryChart data={data} yAxisMin={dataMin - 2} yAxisMax={dataMax + 2} />
+        <HistoryChart data={data} targetDataKeys={['d1', 'd5']} />
       </div>
       <div className="my-4">
         <HistoryTable data={data} />
