@@ -8,6 +8,7 @@ interface DataItem {
   d3: number;
   d4: number;
   d5: number;
+  cmnt: string;
   created: string;
 }
 
