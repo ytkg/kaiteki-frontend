@@ -19,7 +19,7 @@ const DashboardContainer: React.FC = () => {
 
   return (
     <>
-      <CurrentStatus latestData={latestData} />
+      <CurrentStatus latestData={latestData} historyData={data} />
       <OddDataTable data={oddData} />
     </>
   );

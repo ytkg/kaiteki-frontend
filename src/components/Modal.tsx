@@ -4,9 +4,10 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  title?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
   if (!isOpen) {
     return null;
   }
@@ -29,6 +30,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
+        {title && <h2 className="text-xl font-semibold mb-4">{title}</h2>}
         {children}
       </div>
     </div>
