@@ -1,12 +1,10 @@
 import React from 'react';
-import HistoryTable from '../components/HistoryTable';
+import HistoryDataContainer from '../components/HistoryDataContainer';
 
 const DataPage: React.FC = () => {
   return (
     <>
-      <div className="my-4">
-        <HistoryTable />
-      </div>
+      <HistoryDataContainer />
     </>
   );
 };
