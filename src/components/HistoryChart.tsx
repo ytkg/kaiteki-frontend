@@ -19,7 +19,7 @@ interface HistoryChartProps {
 const HistoryChart: React.FC<HistoryChartProps> = ({ data, yAxisMin, yAxisMax }) => {
   const chartData = data.map(item => ({
     ...item,
-    created: new Date(item.created).toLocaleString(),
+    created: new Date(item.created).toLocaleTimeString(),
   })).reverse(); // Reverse the data to show oldest first
 
   return (
@@ -34,12 +34,12 @@ const HistoryChart: React.FC<HistoryChartProps> = ({ data, yAxisMin, yAxisMax })
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="created" />
-        <YAxis domain={[yAxisMin, yAxisMax]} />
+        <XAxis dataKey="created" interval="preserveStartEnd" />
+        <YAxis domain={[yAxisMin, yAxisMax]} tickCount={8} />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="d1" stroke="#8884d8" name="室温" />
-        <Line type="monotone" dataKey="d5" stroke="#82ca9d" name="ミスナール体感温度" />
+        <Line type="monotone" dataKey="d1" stroke="#8884d8" name="室温" dot={false} />
+        <Line type="monotone" dataKey="d5" stroke="#82ca9d" name="ミスナール体感温度" dot={false} />
       </LineChart>
     </ResponsiveContainer>
   );
