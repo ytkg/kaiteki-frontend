@@ -17,7 +17,7 @@ interface HistoryChartProps {
 
 const lineDefs = {
   d1: { name: '室温', stroke: '#8884d8' },
-  d5: { name: 'ミスナール体感温度', stroke: '#82ca9d' },
+  d5: { name: '体感温度', stroke: '#82ca9d' },
   d4: { name: 'エアコンの設定温度', stroke: '#ffc658' },
 };
 

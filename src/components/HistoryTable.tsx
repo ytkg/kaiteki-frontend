@@ -23,7 +23,7 @@ const HistoryTable: React.FC<HistoryTableProps> = ({ data }) => {
             <th className="sticky left-0 bg-gray-100 px-4 py-2 border-b text-left whitespace-nowrap">作成日時</th>
             <th className="px-4 py-2 border-b text-right whitespace-nowrap">室温</th>
             <th className="px-4 py-2 border-b text-right whitespace-nowrap">湿度</th>
-            <th className="px-4 py-2 border-b text-right whitespace-nowrap">ミスナール体感温度</th>
+            <th className="px-4 py-2 border-b text-right whitespace-nowrap">体感温度</th>
             <th className="px-4 py-2 border-b text-right whitespace-nowrap">設定温度</th>
           </tr>
         </thead>
