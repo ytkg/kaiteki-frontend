@@ -18,7 +18,7 @@ interface OddDataTableProps {
 const OddDataTable: React.FC<OddDataTableProps> = ({ data }) => {
   return (
     <div className="my-4">
-      <h3 className="text-lg font-semibold mb-3">実行履歴</h3>
+      <h3 className="text-lg font-semibold mb-1">実行履歴</h3>
       <div className="border rounded-lg bg-gray-50">
         {data.map((item, index) => (
           <div key={index} className={`p-3 ${index < data.length - 1 ? 'border-b border-gray-200' : ''}`}>
