@@ -40,7 +40,7 @@ const RemoteContainer: React.FC = () => {
   const tempPercentage = ((previewTemp - MIN_TEMP) / (MAX_TEMP - MIN_TEMP)) * 100;
 
   return (
-    <>
+    <div>
       <h2 className="text-2xl font-bold mb-4 text-center">目標の体感温度設定</h2>
       <div className="relative flex flex-col items-center gap-6">
         <div className="absolute top-0 right-0 w-9 h-9 translate-x-full">
@@ -65,7 +65,7 @@ const RemoteContainer: React.FC = () => {
           maxTemp={MAX_TEMP}
         />
       </div>
-    </>
+    </div>
   );
 };
 
