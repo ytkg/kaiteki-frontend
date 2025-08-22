@@ -14,7 +14,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-25 z-50 flex justify-center items-center"
+      className="fixed inset-0 bg-black/25 z-50 flex justify-center items-center"
       onClick={onClose}
     >
       <div
