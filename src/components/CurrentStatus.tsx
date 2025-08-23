@@ -14,7 +14,7 @@ interface DataItem {
   created: string;
 }
 
-type ModalContentType = 'd1' | 'd5' | 'd4' | 'remote' | null;
+type ModalContentType = 'd1' | 'd2' | 'd5' | 'd4' | 'remote' | null;
 
 interface CurrentStatusProps {
   latestData: DataItem | null;
@@ -34,6 +34,7 @@ const CurrentStatus: React.FC<CurrentStatusProps> = ({ latestData, historyData }
 
   const modalTitles = {
     d1: '室温',
+    d2: '湿度',
     d5: '体感温度',
     d4: 'エアコン設定温度',
     remote: '目標の体感温度設定',
@@ -44,13 +45,20 @@ const CurrentStatus: React.FC<CurrentStatusProps> = ({ latestData, historyData }
       <div className="mb-4">
         <div className="mb-4">
           <h3 className="text-lg font-semibold mb-1">現在の状況</h3>
-          <div className="grid grid-cols-2 gap-4 text-center">
+          <div className="grid grid-cols-3 gap-4 text-center">
             <div
               className="p-3 border rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors"
               onClick={() => openModal('d1')}
             >
               <p className="text-sm text-gray-600">室温</p>
               <p className="text-2xl font-bold">{latestData.d1}°C</p>
+            </div>
+            <div
+              className="p-3 border rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors"
+              onClick={() => openModal('d2')}
+            >
+              <p className="text-sm text-gray-600">湿度</p>
+              <p className="text-2xl font-bold">{latestData.d2}%</p>
             </div>
             <div
               className="p-3 border rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors"
@@ -88,7 +96,7 @@ const CurrentStatus: React.FC<CurrentStatusProps> = ({ latestData, historyData }
         title={modalContent ? modalTitles[modalContent] : ''}
       >
         {modalContent === 'remote' && <RemoteContainer />}
-        {(modalContent === 'd1' || modalContent === 'd5' || modalContent === 'd4') && (
+        {(modalContent === 'd1' || modalContent === 'd2' || modalContent === 'd5' || modalContent === 'd4') && (
           <HistoryChart data={historyData} targetDataKeys={[modalContent]} />
         )}
       </Modal>
