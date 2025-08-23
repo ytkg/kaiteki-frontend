@@ -16,8 +16,8 @@ interface HistoryListProps {
 }
 
 const HistoryList: React.FC<HistoryListProps> = ({ data }) => {
-  // Font size back to sm, padding is minimal
-  const headerClass = "py-2 px-1 font-semibold text-sm text-gray-600";
+  // Explicitly set text-left on header
+  const headerClass = "py-2 px-1 font-semibold text-sm text-gray-600 text-left";
   const cellClass = "py-2 px-1 text-sm text-gray-800";
 
   // Custom grid columns:
@@ -28,11 +28,12 @@ const HistoryList: React.FC<HistoryListProps> = ({ data }) => {
     <div>
       {/* Header */}
       <div className={`${gridLayout} bg-gray-50 rounded-t-lg`}>
+        {/* Explicitly set text-left on all headers */}
         <div className={`${headerClass} whitespace-nowrap`}>日時</div>
-        <div className={`${headerClass} text-right`}>室温</div>
-        <div className={`${headerClass} text-right`}>湿度</div>
-        <div className={`${headerClass} text-right`}>体感温度</div>
-        <div className={`${headerClass} text-right`}>設定温度</div>
+        <div className={headerClass}>室温</div>
+        <div className={headerClass}>湿度</div>
+        <div className={headerClass}>体感温度</div>
+        <div className={headerClass}>設定温度</div>
       </div>
 
       {/* Body */}
