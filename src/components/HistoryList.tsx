@@ -16,12 +16,11 @@ interface HistoryListProps {
 }
 
 const HistoryList: React.FC<HistoryListProps> = ({ data }) => {
-  // Reduced padding, especially horizontal (px-1)
-  const headerClass = "px-1 py-2 font-semibold text-sm text-gray-600 text-left";
-  const cellClass = "px-1 py-2 text-sm text-gray-800";
+  // Reduced font size to text-xs
+  const headerClass = "px-1 py-2 font-semibold text-xs text-gray-600 text-left whitespace-nowrap";
+  const cellClass = "px-1 py-2 text-xs text-gray-800 whitespace-nowrap";
 
   return (
-    // Removed the overflow-x-auto and min-w containers
     <div>
       {/* Header */}
       <div className="grid grid-cols-5 bg-gray-50 rounded-t-lg">
@@ -36,7 +35,6 @@ const HistoryList: React.FC<HistoryListProps> = ({ data }) => {
       <div className="bg-white rounded-b-lg">
         {data.map((item, index) => (
           <div key={index} className="grid grid-cols-5 border-t border-gray-200">
-            {/* Removed whitespace-nowrap */}
             <div className={cellClass}>{formatDate(item.created)}</div>
             <div className={`${cellClass} text-right`}>{item.d1}°C</div>
             <div className={`${cellClass} text-right`}>{item.d2}%</div>
