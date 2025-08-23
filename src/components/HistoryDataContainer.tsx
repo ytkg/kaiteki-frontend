@@ -24,7 +24,7 @@ const HistoryDataContainer: React.FC = () => {
       </div>
       <div>
         <h3 className="text-lg font-semibold mb-1">履歴データ</h3>
-        <div className="border rounded-lg bg-white">
+        <div className="border rounded-lg bg-white overflow-hidden">
           <HistoryTable data={data} />
         </div>
       </div>
