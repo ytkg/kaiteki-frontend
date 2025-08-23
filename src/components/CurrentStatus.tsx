@@ -45,23 +45,25 @@ const CurrentStatus: React.FC<CurrentStatusProps> = ({ latestData, historyData }
       <div className="mb-4">
         <div className="mb-4">
           <h3 className="text-lg font-semibold mb-1">現在の状況</h3>
-          <div className="grid grid-cols-3 gap-4 text-center">
+          <div className="border rounded-lg flex text-center bg-gray-50">
             <div
-              className="p-3 border rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors"
+              className="p-3 cursor-pointer hover:bg-gray-100 transition-colors flex-1"
               onClick={() => openModal('d1')}
             >
               <p className="text-sm text-gray-600">室温</p>
               <p className="text-2xl font-bold">{latestData.d1}°C</p>
             </div>
+            <div className="border-l border-gray-200 my-2"></div>
             <div
-              className="p-3 border rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors"
+              className="p-3 cursor-pointer hover:bg-gray-100 transition-colors flex-1"
               onClick={() => openModal('d2')}
             >
               <p className="text-sm text-gray-600">湿度</p>
               <p className="text-2xl font-bold">{latestData.d2}%</p>
             </div>
+            <div className="border-l border-gray-200 my-2"></div>
             <div
-              className="p-3 border rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors"
+              className="p-3 cursor-pointer hover:bg-gray-100 transition-colors flex-1"
               onClick={() => openModal('d5')}
             >
               <p className="text-sm text-gray-600">体感温度</p>
@@ -71,16 +73,17 @@ const CurrentStatus: React.FC<CurrentStatusProps> = ({ latestData, historyData }
         </div>
         <div>
           <h3 className="text-lg font-semibold mb-1">設定</h3>
-          <div className="grid grid-cols-2 gap-4 text-center">
+          <div className="border rounded-lg flex text-center bg-gray-50">
             <div
-              className="p-3 border rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors"
+              className="p-3 cursor-pointer hover:bg-gray-100 transition-colors flex-1"
               onClick={() => openModal('remote')}
             >
               <p className="text-sm text-gray-600">目標の体感温度</p>
               <p className="text-2xl font-bold">{targetTemperature.toFixed(1)}°C</p>
             </div>
+            <div className="border-l border-gray-200 my-2"></div>
             <div
-              className="p-3 border rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors"
+              className="p-3 cursor-pointer hover:bg-gray-100 transition-colors flex-1"
               onClick={() => openModal('d4')}
             >
               <p className="text-sm text-gray-600">エアコンの設定温度</p>
