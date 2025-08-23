@@ -1,6 +1,6 @@
 import React from 'react';
 import HistoryChart from './HistoryChart';
-import HistoryList from './HistoryList'; // HistoryTableをHistoryListに変更
+import HistoryTable from './HistoryTable';
 import { useHistoryData } from '../hooks/useHistoryData';
 
 const HistoryDataContainer: React.FC = () => {
@@ -24,8 +24,8 @@ const HistoryDataContainer: React.FC = () => {
       </div>
       <div>
         <h3 className="text-lg font-semibold mb-1">履歴データ</h3>
-        <div className="border rounded-lg bg-white p-4">
-          <HistoryList data={data} />
+        <div className="border rounded-lg bg-white">
+          <HistoryTable data={data} />
         </div>
       </div>
     </div>
