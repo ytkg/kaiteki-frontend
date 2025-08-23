@@ -53,7 +53,7 @@ const CurrentStatus: React.FC<CurrentStatusProps> = ({ latestData, historyData }
               <p className="text-sm text-gray-600">室温</p>
               <p className="text-2xl font-bold">{latestData.d1}°C</p>
             </div>
-            <div className="border-l border-gray-200 my-4"></div>
+            <div className="border-l border-gray-200 my-2"></div>
             <div
               className="p-3 cursor-pointer hover:bg-gray-100 transition-colors flex-1"
               onClick={() => openModal('d2')}
@@ -61,7 +61,7 @@ const CurrentStatus: React.FC<CurrentStatusProps> = ({ latestData, historyData }
               <p className="text-sm text-gray-600">湿度</p>
               <p className="text-2xl font-bold">{latestData.d2}%</p>
             </div>
-            <div className="border-l border-gray-200 my-4"></div>
+            <div className="border-l border-gray-200 my-2"></div>
             <div
               className="p-3 cursor-pointer hover:bg-gray-100 transition-colors flex-1"
               onClick={() => openModal('d5')}
@@ -81,7 +81,7 @@ const CurrentStatus: React.FC<CurrentStatusProps> = ({ latestData, historyData }
               <p className="text-sm text-gray-600">目標の体感温度</p>
               <p className="text-2xl font-bold">{targetTemperature.toFixed(1)}°C</p>
             </div>
-            <div className="border-l border-gray-200 my-4"></div>
+            <div className="border-l border-gray-200 my-2"></div>
             <div
               className="p-3 cursor-pointer hover:bg-gray-100 transition-colors flex-1"
               onClick={() => openModal('d4')}
