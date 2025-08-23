@@ -16,19 +16,17 @@ interface HistoryListProps {
 }
 
 const HistoryList: React.FC<HistoryListProps> = ({ data }) => {
-  // Explicitly set text-left on header
-  const headerClass = "py-2 px-1 font-semibold text-sm text-gray-600 text-left";
+  // Header text is now centered
+  const headerClass = "py-2 px-1 font-semibold text-sm text-gray-600 text-center";
   const cellClass = "py-2 px-1 text-sm text-gray-800";
 
-  // Custom grid columns:
-  // 1st column (date) is flexible, others are sized to their content.
-  const gridLayout = "grid gap-x-2 grid-cols-[1fr_repeat(4,min-content)]";
+  // Using max-content to prevent text from breaking vertically
+  const gridLayout = "grid gap-x-2 grid-cols-[auto_repeat(4,max-content)]";
 
   return (
     <div>
       {/* Header */}
       <div className={`${gridLayout} bg-gray-50 rounded-t-lg`}>
-        {/* Explicitly set text-left on all headers */}
         <div className={`${headerClass} whitespace-nowrap`}>日時</div>
         <div className={headerClass}>室温</div>
         <div className={headerClass}>湿度</div>
