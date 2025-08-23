@@ -16,3 +16,18 @@ export function formatTimestamp(dateString: string): string {
   const flooredDate = floorDateTo5Minutes(date);
   return flooredDate.toISOString();
 }
+
+/**
+ * Formats a date string into a user-friendly ja-JP locale string.
+ * e.g., "08/22 16:57"
+ * @param dateString The date string to format.
+ * @returns The formatted date string.
+ */
+export function formatDate(dateString: string): string {
+  return new Date(dateString).toLocaleString('ja-JP', {
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
