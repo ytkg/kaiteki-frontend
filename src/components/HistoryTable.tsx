@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatDate } from '../utils/date';
 
 // Define the type for a single data item
 interface DataItem {
@@ -17,24 +18,24 @@ interface HistoryTableProps {
 const HistoryTable: React.FC<HistoryTableProps> = ({ data }) => {
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full bg-white border border-gray-200">
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="sticky left-0 bg-gray-100 px-4 py-2 border-b text-left whitespace-nowrap">日時</th>
-            <th className="px-4 py-2 border-b text-right whitespace-nowrap">室温</th>
-            <th className="px-4 py-2 border-b text-right whitespace-nowrap">湿度</th>
-            <th className="px-4 py-2 border-b text-right whitespace-nowrap">体感温度</th>
-            <th className="px-4 py-2 border-b text-right whitespace-nowrap">設定温度</th>
+      <table className="w-full text-sm border-collapse">
+        <thead>
+          <tr className="bg-gray-50">
+            <th className="p-2 font-semibold text-gray-600 text-center whitespace-nowrap">日時</th>
+            <th className="p-2 font-semibold text-gray-600 text-center whitespace-nowrap">室温</th>
+            <th className="p-2 font-semibold text-gray-600 text-center whitespace-nowrap">湿度</th>
+            <th className="p-2 font-semibold text-gray-600 text-center whitespace-nowrap">体感温度</th>
+            <th className="p-2 font-semibold text-gray-600 text-center whitespace-nowrap">設定温度</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index} className="hover:bg-gray-50">
-              <td className="sticky left-0 bg-white px-4 py-2 border-b whitespace-nowrap">{new Date(item.created).toLocaleString('ja-JP', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</td>
-              <td className="px-4 py-2 border-b text-right whitespace-nowrap">{item.d1}</td>
-              <td className="px-4 py-2 border-b text-right whitespace-nowrap">{item.d2}</td>
-              <td className="px-4 py-2 border-b text-right whitespace-nowrap">{item.d5}</td>
-              <td className="px-4 py-2 border-b text-right whitespace-nowrap">{item.d4}</td>
+            <tr key={index} className="border-t border-gray-200">
+              <td className="p-2 text-gray-800 text-center whitespace-nowrap">{formatDate(item.created)}</td>
+              <td className="p-2 text-gray-800 text-right whitespace-nowrap">{item.d1}°C</td>
+              <td className="p-2 text-gray-800 text-right whitespace-nowrap">{item.d2}%</td>
+              <td className="p-2 text-gray-800 text-right whitespace-nowrap">{item.d5}°C</td>
+              <td className="p-2 text-gray-800 text-right whitespace-nowrap">{item.d4}°C</td>
             </tr>
           ))}
         </tbody>

@@ -7,22 +7,28 @@ const HistoryDataContainer: React.FC = () => {
   const { data, error, isLoading } = useHistoryData(300);
 
   if (isLoading) {
-    return <div>読み込み中...</div>;
+    return <div className="text-center">読み込み中...</div>;
   }
 
   if (error || !data) {
-    return <div>エラー: {error ? error.message : 'データの取得に失敗しました'}</div>;
+    return <div className="text-center text-red-500">エラー: {error ? error.message : 'データの取得に失敗しました'}</div>;
   }
 
   return (
-    <>
-      <div className="my-4">
-        <HistoryChart data={data} targetDataKeys={['d1', 'd5']} />
+    <div className="space-y-4">
+      <div>
+        <h3 className="text-lg font-semibold mb-1">温度推移</h3>
+        <div className="border rounded-lg bg-white p-4">
+          <HistoryChart data={data} targetDataKeys={['d1', 'd5']} />
+        </div>
       </div>
-      <div className="my-4">
-        <HistoryTable data={data} />
+      <div>
+        <h3 className="text-lg font-semibold mb-1">履歴データ</h3>
+        <div className="border rounded-lg bg-white overflow-hidden">
+          <HistoryTable data={data} />
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
